@@ -2,19 +2,30 @@
 
 // Exercicios;
 
-// 1.Crea unha variable que almacene un día da semana de luns a domingo. En función do valor da variable mostra unha mensaxe indicando se o día é laborable ou non
+//Como se accede ao último carácter dunha cadea?
 
-const nonLaborable = ["sábado", "domingo"];
+const palabra = "carmen";
 
-console.log("EXERCICIO 1");
+console.log(palabra.at(-1));
 
-let diaSemana = "luns";
+// Dada a seguinte constante, fai as operacións necesarias para que o primeiro carácter estea en maiúscula:
 
-if (!(diaSemana in nonLaborable)) console.log("É laborable");
-else {
-  console.log("Non é laborable");
+const cadea = "desenvolvemento web";
+
+let novaCadea = cadea.at(0).toUpperCase() + cadea.substring(1);
+
+console.log(novaCadea);
+
+// Crea unha función denominada reverseString á que se lle pase unha cadea e devolva unha nova cadea cos caracteres da orixinal en sentido inverso
+
+function reverseString(cadea2) {
+  let reversed = "";
+
+  for (let i = cadea2.lenght() - 1; i >= 0; i--) {
+    reversed += cadea2[i];
+  }
+
+  return reversed;
 }
 
-// 2.Crea 3 variables e inicialízaas con 3 números diferentes. Mostra por pantalla o maior dos 3 números
-
-console.log("EXERCICIO 2");
+console.log(reverseString("Hola"));
