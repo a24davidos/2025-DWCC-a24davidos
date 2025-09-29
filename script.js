@@ -21,7 +21,7 @@ console.log(novaCadea);
 function reverseString(cadea2) {
   let reversed = "";
 
-  for (let i = cadea2.length() - 1; i >= 0; i--) {
+  for (let i = cadea2.length - 1; i >= 0; i--) {
     reversed += cadea2[i];
   }
 
