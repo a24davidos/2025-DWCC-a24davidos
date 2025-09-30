@@ -2,6 +2,8 @@
 
 // Exercicios;
 
+// NUMBER
+
 //Como se accede ao último carácter dunha cadea?
 
 const palabra = "carmen";
@@ -29,3 +31,30 @@ function reverseString(cadea2) {
 }
 
 console.log(reverseString("Hola"));
+
+// Crea unha función denominada enmascarar á que se lle pase unha cadea de números e devolva unha cadea da mesma lonxitude que a pasada como parámetro pero formada formada por * e as últimas 4 cifras do parámetro de entrada
+
+function enmascarar(texto) {
+  if (texto.length <= 4) return texto;
+
+  let ultimos4 = texto.slice(-4);
+  let enmascarado = ultimos4.padStart(texto.length, "*");
+
+  return enmascarado;
+}
+
+console.log(enmascarar("48110559"));
+
+// MATH
+
+// Numeros aleatorios
+// Xera un número enteiro aleatorio entre 0 e 3 (incluidos)
+console.log(Math.floor(Math.random() * 4));
+// Xera un número enteiro aleatorio entre 1 e 3 (incluidos)
+console.log(Math.ceil(Math.random() * 3));
+// Crea unha función que devolva un número enteiro aleatorio entre os dous valores pasados como parámetros. Así, por exemplo, a  eguinte instrución debe mostrar un número aleatorio entre 5 e 10 (incluídos)
+function getRandomIntInclusive(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+console.log(getRandomIntInclusive(5, 10));
