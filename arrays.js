@@ -63,3 +63,16 @@ let players1Final;
 players1Final = [...players1, "Thiago", "Coutinho", "Periscic"];
 
 console.log(players1Final);
+
+// 2. Dado un array con nomes de variables formados por dúas palabras separadas por “_”, fai as operacións necesarias para mostrar por consola os nomes das variables en formato camelCase. Por exemplo, se o array de entrada é [“first_name”, “ last_NAME”], deberase mostrar por consola “firtsName” e “lastName”
+
+const variables = ["fIrst_name", "last_NAME"];
+
+for (const palabra of variables) {
+  // Hacemos la desestructuración
+  let [first, second] = palabra.split("_");
+  // Pasamos primero y segundo a minuscula
+  first = first.toLowerCase();
+  second = second.toLowerCase();
+  console.log(first + second.toUpperCase().at(0) + second.slice(1));
+}
