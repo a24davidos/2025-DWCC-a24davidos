@@ -70,9 +70,28 @@ const variables = ["fIrst_name", "last_NAME"];
 
 for (const palabra of variables) {
   // Hacemos la desestructuración
-  let [first, second] = palabra.split("_");
-  // Pasamos primero y segundo a minuscula
-  first = first.toLowerCase();
-  second = second.toLowerCase();
-  console.log(first + second.toUpperCase().at(0) + second.slice(1));
+  let [first, second] = palabra.toLocaleLowerCase().trim().split("_");
+
+  const output = `${first}${second.replace(
+    second[0],
+    second[0].toUpperCase()
+  )}`;
+
+  console.log(output);
+}
+
+// 3.  Escribe o código necesario para procesar unha cadea con información de voos como a do exemplo e mostrar a información por consola formateada como aparece na imaxe:
+const flightsInfo =
+  "_Delayed_Departure;scq93766109;bio2133758440;11:25+_Arrival;bio0943384722;scq93766109;11:45+_Delayed_Arrival;svq7439299980;scq93766109;12:05+_Departure;scq93766109;svq2323639855;12:30";
+
+function getCOde(str) {
+  return str.slice(0, 3).toUpperCase();
+}
+
+for (const flight of flightsInfo.split("+")) {
+  const [type, from, to, time] = flight.split(";");
+  const output = `${type.replaceAll("_", " ")} ${getCOde(from)} ${getCOde(
+    to
+  )} (${time.replace(":", "h")})`.padStart(36);
+  console.log(output);
 }
