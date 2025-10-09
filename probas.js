@@ -32,6 +32,9 @@ const {
   odds: { team1, x: draw, team2 },
 } = game;
 
+// Esta versión desesctrucuta la clase de la clase
+// const { team1, x: drawm, team2 } = game.odds;
+
 console.log(`${team1} - ${draw} - ${team2}`);
 
 // 3. Dado o seguinte obxecto:
@@ -40,10 +43,35 @@ const juego = {
   scored: ["Lewandowski", "Gnarby", "Lewandowski", "Hummels"],
 };
 
-let i;
-
-console.log(juego.scored);
-
-for (i of juego.scored) {
-  console.log(i);
+//mIRAR ESTO
+for (const [index, player] of juego.scored.entries()) {
+  console.log(`Gol ${index + 1} Player ${player}`);
 }
+
+// const scorers = {};
+// for (const player of juego.scored)
+//   scorers(player) ? scorers[player]++ : (scorers[player] = 1);
+// console.log(scorers);
+
+//1. O seguinte mapa almacena información dos eventos ocorridos durante un partido indicando o minuto no que se produciron:
+
+const gameEvents = new Map([
+  [17, "GOAL"],
+  [36, "Substitution"],
+  [47, "GOAL"],
+  [61, "Substitution"],
+  [64, "Yellow card"],
+  [69, "Red card"],
+  [70, "Substitution"],
+  [72, "Substitution"],
+  [76, "GOAL"],
+  [80, "GOAL"],
+  [92, "Yellow card"],
+]);
+
+// a. Crea un novo array chamado eventos que almacene os diferentes eventos (non o minuto) ocorridos durante o partido (sen que haxa duplicados)
+
+const events = [...new Set(gameEvents.values())];
+console.log(events);
+
+// b. Recorre con un bucle o mapa gameEvents e mostra información de cada evento, indicando se ocorreu na primeira metade ou na segunda metade do partido, por exemplo: [PRIMEIRA PARTE] 17: GOAL
