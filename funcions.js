@@ -50,3 +50,5 @@ console.log(minMax([1, 2, 3, 4, 5]));
 // proporcionadas pola linguaxe JavaScript para buscar en cadeas.
 // Non se deben distinguir maiúsculas de minúsculas.
 // Exemplo: buscarPatron(“000111101000ABCHA”, “00”) debe devolver 4
+
+function calcularMinasAdxacentes2(tableiro)
