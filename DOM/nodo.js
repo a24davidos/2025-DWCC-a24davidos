@@ -3,11 +3,14 @@
 
 // o nodo < div >
 
-console.log(document.getElementsByTagName("div"));
-
+console.log(document.body.childNodes[1]);
+console.log(document.body.firstElementChild);
+console.log(document.body.children[0]);
 // o nodo < ul >
 
 console.log(document.getElementsByTagName("ul"));
+
+console.log(document.body.children[1].lastChild.nextSibling);
 
 // o segundo <li>
 
