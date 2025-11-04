@@ -22,6 +22,8 @@ div.style.width = "900px";
 // Cambia o valor do atributo "placeholder" do input a "Escribe aquí..."
 
 let input = document.getElementById("entradaTexto");
+console.log(input);
+
 //esto no va tienes que revisarlo
 input.style.value = "Escribe aquí...";
 
