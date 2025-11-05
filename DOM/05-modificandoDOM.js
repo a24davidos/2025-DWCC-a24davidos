@@ -25,10 +25,43 @@ let input = document.getElementById("entradaTexto");
 console.log(input);
 
 //esto no va tienes que revisarlo
-input.style.value = "Escribe aquí...";
+input.placeholder = "Escribe aquí...";
 
 // Selecciona a lista con id "lista" e cámbialle o tamaño da fonte a 18px
 
+let listaId = document.getElementById("lista");
+
+listaId.style.fontSize = "18px";
+
+
 // Elimina o segundo elemento da lista (Item 2)
 
+let item2 = document.querySelector("#lista li:nth-child(2)");
+
+//Otra forma de seleccionar 
+/* 
+let items = document.getElementsByClassName("item-lista");
+let item2 = items[1]; 
+*/
+
+listaId.removeChild(item2);
+
 // Insire un novo parágrafo co texto "Texto dinámico" despois do elemento con id "mensaxe"
+
+let texto = document.createElement("p");
+texto.innerHTML = "Texto dinámico"
+
+let mensaxe = document.getElementById("mensaxe");
+
+mensaxe.after(texto);
+
+
+
+/* estática: os cambios no DOM non afectan ao contido da colección. Por
+exemplo, document.querySelectorAll() devolve unha NodeList estática.
+○ viva: o seu contido actualízase cada vez que se engade ou elimina un
+elemento do DOM. Así, por exemplo, Node.childNodes devolve unha
+NodeList viva de nodos. Sen embargo, childNodes é unha propiedade de só
+lectura, xa que non se poden engadir nin eliminar elementos da colección
+directamente. Para facelo haberá que utilizar os métodos apropiados de
+modificación do DOM. */
