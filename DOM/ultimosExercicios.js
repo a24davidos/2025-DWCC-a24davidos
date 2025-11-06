@@ -2,14 +2,16 @@
 
 const ol = document.querySelector("ol");
 
+//NUNCA ELIMINES CON FOR, PORQUE COMO SON COLECCIONES VIVAS, VA A TOLEAR Y NO VA FUNCIONAR BIEN EL BUCLE!!! SINO LO QUE PUEDO HACER ES UTILIZAR UNA LISTA ESTÁTICA Y AHÍ SI QUE PODRÍA HACER USO DEL FOR. CON UN FOR AL REVÉS Y UNA COLECCIÓN VIVA SI QUE PUEDES HACER QUE FUNCIONE SI EMPIEZAS POR EL FINAL
 while (ol.firstChild) {
   ol.firstChild.remove();
 }
 
 // Dado o seguinte código, ¿por que segue aparecendo o “Texto” despois de borrar a táboa?
 let taboa = document.getElementById("taboa");
-// taboa.remove();
-//Neste caso é porque estamos accedendo a taboa a través do HTMLCollection , é dicir só accede ás etiquetas, mentres que os nodos teñen a capacidade de acceder a texto e comentarios.
+taboa.remove();
+
+//NESTE CASO É PORQUE O TEXTO NON FORMA PARTE DA TABOA, COMO NON É HTML CORRECTO SACAO FORA DA TÁBOA E NON SE PODE ELIMINAR
 
 /* 4.- Crea un documento HTML que conteña un elemento <ul>. Dende JavaScript crea 4 elementos <li> e engádeos á lista <ul>, de tal forma que sexan visibles no navegador. */
 
@@ -51,14 +53,14 @@ let arbore = {
       oak: {},
     },
     Flowering: {
-      'apple tree': {},
+      "apple tree": {},
       magnolia: {},
     },
   },
 };
 
 function createTree(data) {
-  if (!data || Object.keys(data).length === 0) {
+  if (Object.keys(data).length === 0) {
     return null;
   }
 
@@ -71,7 +73,7 @@ function createTree(data) {
     let li = document.createElement("li");
     li.textContent = key;
 
-    // 👇 Llamada recursiva para los hijos de esta clave
+    // Llamada recursiva para los hijos de esta clave
     let subTree = createTree(data[key]);
 
     // Si la llamada devolvió algo (no null), lo añadimos dentro del <li>
@@ -90,7 +92,6 @@ function createTree(data) {
 let container = document.getElementById("container");
 container.appendChild(createTree(arbore));
 
-
 /* HACER ESTOOOO!!! */
 /* Escribe unha función crearCalendario(elemento, ano, mes) que engada ao
 elemento pasado como parámetro un calendario
@@ -103,8 +104,6 @@ función cos seguintes parámetros vese na imaxe
 seguinte. Observar que se aplicaron estilos CSS
 para mellorar o aspecto.
 crearCalendario(calendario, 2022, 11); */
-
-
 
 let table = document.getElementById("taboaOrdenar");
 let tbody = table.querySelector("tbody");

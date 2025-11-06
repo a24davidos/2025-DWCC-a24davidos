@@ -1,0 +1,1 @@
+- Entender porque no puedo usar funciones flechas, o porque si las puedo usar pero no puedo hacer uso del this, eso me lia.
