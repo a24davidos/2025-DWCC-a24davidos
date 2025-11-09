@@ -85,10 +85,9 @@ console.log(Object.keys(eventos));
 
 Object.keys(eventos).forEach((evento) => {
   imagen.addEventListener(evento, () => {
-    //Usa eventos[evento] para acceder al nombre de la variable, es decir al value del key!
     console.log(eventos[evento])
-  } )
-} );
+  })
+});
 
 /* // Evento: click
 imagen.addEventListener("click", () => {
@@ -144,3 +143,49 @@ imagen.addEventListener("drag", () => {
 imagen.addEventListener("dragend", () => {
   console.log("Evento: fin del arrastre");
 }); */
+
+/* 1.- Dado o seguinte código HTML:*/
+/* - Cando o cursor do rato entre e saia do botón, mostra unha mensaxe por
+consola indicándoo */
+
+const buttonE1 = document.getElementById("ocultar");
+
+buttonE1.addEventListener("mouseover", () => {
+  console.log("Evento: ratón sobre texto");
+})
+
+buttonE1.addEventListener("mouseout", () => {
+  console.log("Evento: Ratón saliendo")
+})
+
+/* Ao pulsar o botón debe desaparecer o div con id=texto.*/
+
+buttonE1.addEventListener("click", function () {
+  const texto = document.getElementById("textoE1");
+  texto.classList.toggle("oculto");
+})
+
+/* Cando se escriba algo na caixa de texto, debe mostrarse información da
+tecla pulsada no div e tamén o código da tecla pulsada. Ademais, se o div
+estaba oculto, debe mostrarse. */
+/* 
+const inputTexto1 = document.getElementById("textoExercicio1");
+
+const texto1 = document.getElementById("textoE1");
+
+
+inputTexto1.addEventListener("keydown", function(event){
+  texto1.textContent = `KeyboardEvent: key='${event.key}' | code='${event.code}'`;
+  console.log("Tecla pulsada: " , event.key)
+})
+
+ */
+
+const inputTexto1 = document.getElementById("textoExercicio1");
+  const texto1 = document.getElementById("textoE1");
+
+inputTexto1.addEventListener("keydown", function() {
+  setTimeout(() => {
+    texto1.innerHTML = inputTexto1.value;
+  }, 0);
+});
