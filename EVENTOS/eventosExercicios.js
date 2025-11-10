@@ -182,9 +182,9 @@ inputTexto1.addEventListener("keydown", function(event){
  */
 
 const inputTexto1 = document.getElementById("textoExercicio1");
-  const texto1 = document.getElementById("textoE1");
+const texto1 = document.getElementById("textoE1");
 
-inputTexto1.addEventListener("keydown", function() {
+inputTexto1.addEventListener("keydown", function () {
   setTimeout(() => {
     texto1.innerHTML = inputTexto1.value;
   }, 0);

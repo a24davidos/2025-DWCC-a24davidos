@@ -1,71 +1,102 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <style>
-      table {
-        border-collapse: collapse;
-      }
-      th,
-      td {
-        border: 1px solid black;
-        padding: 4px;
-      }
-      th {
-        cursor: pointer;
-      }
-      th:hover {
-        background: yellow;
-      }
-    </style>
-  </head>
 
-  <body>
-    <table id="grid">
-      <thead>
-        <tr>
-          <th data-type="number">Age</th>
-          <th data-type="string">Name</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>5</td>
-          <td>John</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Pete</td>
-        </tr>
-        <tr>
-          <td>12</td>
-          <td>Ann</td>
-        </tr>
-        <tr>
-          <td>9</td>
-          <td>Eugene</td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>Ilya</td>
-        </tr>
-      </tbody>
-    </table>
+<head>
+  <meta charset="utf-8" />
+  <style>
+    table {
+      border-collapse: collapse;
+    }
 
-    <script defer>
-      //Collo as filas da taboa
-      let filas = document.querySelector("tbody").rows;
-      console.log(filas);
+    th,
+    td {
+      border: 1px solid black;
+      padding: 4px;
+    }
 
-      console.log(filas[0].children[0].textContent);
-      console.log(filas[0].children);
+    th {
+      cursor: pointer;
+    }
 
-      for (let i = 0; i < filas.length; i++) {
-        for (let y = 0; y < 2; y++) {
-          const cell = filas[i].children[y];
-          console.log(cell);
-        }
+    th:hover {
+      background: yellow;
+    }
+  </style>
+</head>
+
+<body>
+  <table id="grid">
+    <thead>
+      <tr>
+        <th data-type="number">Age</th>
+        <th data-type="string">Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>5</td>
+        <td>John</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Pete</td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td>Ann</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>Eugene</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Ilya</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script defer>
+
+    const table = document.querySelector("table"); // seleccionamos la tabla
+    const thead = table.querySelector("thead");
+    const tbody = table.querySelector("tbody"); // ahora sí
+
+    let filas = Array.from(tbody.rows)
+
+    console.log(thead);
+
+    thead.addEventListener("click", function (e) {
+      //Cojemos la referencia de donde se clicka para saber el type
+      let th = e.target
+      console.log(th.dataset.type);
+      //Cojemos el indice de donde se clicko para poder hacer la comperación
+      let indice = th.cellIndex;
+      //Una vez cogida la referencia de donde se clicko guardamos el type en una variable
+      let type = th.dataset.type;
+
+
+      if (type === "string") {
+        filas.sort((a, b) => {
+          let nomeA = a.cells[indice].textContent.toLocaleLowerCase();
+          let nomeB = b.cells[indice].textContent.toLocaleLowerCase();
+          return nomeA.localeCompare(nomeB);
+        })
+      } else {
+        filas.sort((a, b) => {
+          let numA = Number(a.cells[indice].textContent)
+          let numB = Number(b.cells[indice].textContent)
+          return numA - numB
+        })
       }
-    </script>
-  </body>
+
+      for (let fila of filas) {
+        tbody.appendChild(fila)
+      }
+
+    })
+
+  </script>
+</body>
+
 </html>
