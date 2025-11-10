@@ -113,13 +113,14 @@ let filas = Array.from(tbody.rows);
 
 // Ordenamos as filas segundo o contido da primeira cela (columna “Nome”)
 filas.sort((a, b) => {
-  let nomeA = a.cells[0].textContent.toLowerCase();
-  let nomeB = b.cells[0].textContent.toLowerCase();
+  let nomeA = a.cells[1].textContent.toLowerCase();
+  let nomeB = b.cells[1].textContent.toLowerCase();
   return nomeA.localeCompare(nomeB);
 });
 
 // Eliminamos as filas actuais e engadimos as ordenadas
-tbody.innerHTML = "";
+// tbody.innerHTML = "";
+//Esto non fai falta, porque estamos funcionando con punteiros e dicir cando fas o appendChild non estas creando algo novo senon que estas movendo xa que non estas facendo unha copia
 for (let fila of filas) {
   tbody.appendChild(fila);
 }
