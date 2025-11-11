@@ -1,40 +1,61 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      #contents {
+        padding: 5px;
+        border: 1px green solid;
+      }
+    </style>
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <style>
-    #contents {
-      padding: 5px;
-      border: 1px green solid;
-    }
-  </style>
-</head>
+  <body>
+    <fieldset id="contents">
+      <legend>#contents</legend>
+      <p>
+        ¿Que tal si leemos <a href="https://wikipedia.org">Wikipedia</a> o
+        visitamos <a href="https://w3.org"><i>W3.org</i></a> y aprendemos sobre
+        los estándares modernos?
+      </p>
+    </fieldset>
 
-<body>
+    <li id="texto">hola</li>
+  </body>
 
-  <fieldset id="contents">
-    <legend>#contents</legend>
-    <p>
-      ¿Que tal si leemos <a href="https://wikipedia.org">Wikipedia</a> o visitamos <a href="https://w3.org"><i>W3.org</i></a> y aprendemos sobre los estándares modernos?
-    </p>
-  </fieldset>
+  <script defer>
+    const li = document.getElementById("texto");
+    console.log(li);
 
-</body>
+    let texto = li.innerHTML;
+    console.log(texto);
 
-<script defer>
-    const link = document.querySelector("a")
-    console.log(link.href);
-    const redic = link.href
+    li.innerHTML = `<span>${texto}</span>`;
 
-    link.addEventListener("click", function(e){
-        e.preventDefault()
-        if(confirm(`Estas seguro que deseas continuar a ${link.innerHTML} ?`)){
-            location.href = redic
+    const fieldset = document.getElementById("contents");
+    console.log(fieldset);
+
+    fieldset.addEventListener("click", function (e) {
+      //Evitamos abrir en una nueva pestaña
+      e.preventDefault();
+
+      const link = e.target;
+      console.log(link.tagName);
+
+      if (link.tagName == "A") {
+        if (confirm(`Esta seguro que deeas continuar a ${link.innerHTML}`)) {
+          location.href = link.href;
         }
-    })
+      } else if (link.tagName == "I") {
+        const a = e.target.closest("a");
+        if (
+          confirm(`Esta seguro que deeas continuar a ${e.target.innerHTML}`)
+        ) {
+          location.href = a.href;
+        }
+      }
 
-
-</script>
-
+      console.log(e.target);
+    });
+  </script>
 </html>
