@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input:invalid {
+            border: 2px dashed red;
+        }
+
+        input:valid {
+            border: 2px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <label for="mail">I would like you to provide me with an e-mail address:</label>
+        <input type="email" id="mail" name="mail">
+        <button>Submit</button>
+    </form>
+</body>
+<script>
+    const email = document.getElementById("mail");
+    email.addEventListener("input", function (event) {
+/*         typeMismatch es true si el valor del input no coincide con el tipo esperado (type="email")*/        if (email.validity.typeMismatch) {
+            // permite poner un mensaje personalizado que aparecerá si el input no es válido
+            email.setCustomValidity("I am expecting an e-mail address!");
+            /* Esto fuerza al navegador a mostrar el mensaje de error en ese momento, sin esperar a enviar el formulario. Si se comenta esta línea, el mensaje solo aparecerá al intentar enviar el formulario. */
+            email.reportValidity();
+        } else {
+            /*Si el valor escrito es válido (es decir, parece un email), se limpia el mensaje de error.*/           
+            email.setCustomValidity("");
+        }
+    });
+</script>
+
+</html>
