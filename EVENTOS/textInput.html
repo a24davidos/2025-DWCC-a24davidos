@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Test</title>
-  <style>
-    #textoE1 {
-      border: 2px solid red;
-      padding: 10px;
-      color: black;
-      background-color: white;
-      display: block;
-    }
-  </style>
-</head>
-<body>
-  <input type="text" id="textoExercicio1" placeholder="Escribe aquí..." />
-  <div id="textoE1">Texto inicial</div>
+  <head>
+    <title>Test</title>
+    <style>
+      #textoE1 {
+        border: 2px solid red;
+        padding: 10px;
+        color: black;
+        background-color: white;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" id="textoExercicio1" placeholder="Escribe aquí..." />
+    <div id="textoE1">Texto inicial</div>
 
-  <script>
-    const inputTexto1 = document.getElementById("textoExercicio1");
-    const texto1 = document.getElementById("textoE1");
+    <script>
+      const inputTexto1 = document.getElementById("textoExercicio1");
+      const texto1 = document.getElementById("textoE1");
 
-    inputTexto1.addEventListener("keydown", function(event) {
-      console.log("Tecla pulsada:", event.key);
-      texto1.innerHTML = `Tecla: ${event.key}, Código: ${event.code}`;
-    });
-  </script>
-</body>
+      inputTexto1.addEventListener("keydown", function (event) {
+        console.log("Tecla pulsada:", event.key);
+        texto1.innerHTML = `Tecla: ${event.key}, Código: ${event.code}`;
+      });
+    </script>
+  </body>
 </html>
