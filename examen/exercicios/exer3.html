@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reloj HH:MM:SS AM/PM</title>
+    <style>
+        #reloj {
+            font-size: 2rem;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div id="reloj">00:00:00 AM</div>
+
+    <script>
+        function actualizarReloj() {
+            const ahora = new Date();
+
+            let horas = ahora.getHours(); // 0-23
+            const minutos = ahora.getMinutes();
+            const segundos = ahora.getSeconds();
+
+            // Determinar AM o PM
+            const ampm = horas >= 12 ? 'PM' : 'AM';
+
+            // Convertir horas a formato 12h
+            horas = horas % 12;
+            horas = horas === 0 ? 12 : horas;
+
+            // Añadir cero delante si es menor que 10
+            const strHoras = horas.toString().padStart(2, '0');
+            const strMinutos = minutos.toString().padStart(2, '0');
+            const strSegundos = segundos.toString().padStart(2, '0');
+
+            // Mostrar en el div
+            const relojDiv = document.getElementById('reloj');
+            relojDiv.innerText = `${strHoras}:${strMinutos}:${strSegundos} ${ampm}`;
+        }
+
+        // Actualizar reloj cada segundo
+        actualizarReloj(); // llamamos una vez al cargar
+        setInterval(actualizarReloj, 1000);
+    </script>
+</body>
+</html>

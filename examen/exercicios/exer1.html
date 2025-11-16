@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="a" style="width: 100px; height: 100px;">
+    </div>
+    <br>
+    <label for="ancho">Ancho: </label>
+    <input type="number" id="ancho" min="0" max="1000">
+    <label for="height">Alto</label>
+    <input type="number" id="alto" min="0" max="1000">
+
+
+</body>
+<script defer>
+    /*Crea unha páxina web que teña un div de tamaño 100x100 e cor de fondo (a que
+    queiras). Engade dous campos numéricos con valores entre 0 e 1000 que
+    representarán o alto e ancho do div. Cada vez que se cambie o valor dos campos,
+    debe redimensionarse o div cos valores indicados. */
+
+
+    const id = document.getElementsByClassName("a")
+
+    console.log(a);
+    console.log(a.style["width"]= "300px");
+    
+    const ancho = document.getElementById("ancho")
+    console.log(ancho);
+    
+    const alto = document.getElementById("alto")
+
+    ancho.addEventListener("input", () => {
+        a.style["width"] = ancho.value + "px"
+        console.log("hola");
+    })
+
+    alto.addEventListener("input", () => {
+        a.style["height"] = alto.value + "px"
+
+    })
+
+</script>
+
+</html>
