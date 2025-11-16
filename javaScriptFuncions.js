@@ -188,7 +188,7 @@ function comprobarMinas(tablero) {
         //Comprobamos las posiciones relativas a la posición en la que estamos 
 
         for (let x = -1; x <= 1; x++) {
-          for (let y = -1; x <= 1; y++) {
+          for (let y = -1; y <= 1; y++) {
             // Saltamos la propia celda
             if (x === 0 && y === 0) {
               continue
