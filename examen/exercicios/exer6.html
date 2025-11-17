@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla Editable</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 60%;
+            margin: 20px auto;
+        }
+
+        td {
+            border: 1px solid #333;
+            padding: 10px;
+            width: 100px;
+            height: 40px;
+            position: relative;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            resize: none;
+            font-family: inherit;
+            font-size: inherit;
+        }
+    </style>
+</head>
+
+<body>
+
+    <table id="tabla">
+        <tr>
+            <td>Celda 1</td>
+            <td>Celda 2</td>
+            <td>Celda 3</td>
+        </tr>
+        <tr>
+            <td>Celda 4</td>
+            <td>Celda 5</td>
+            <td>Celda 6</td>
+        </tr>
+        <tr>
+            <td>Celda 7</td>
+            <td>Celda 8</td>
+            <td>Celda 9</td>
+        </tr>
+    </table>
+
+    <script>
+        const tabla = document.getElementById('tabla');
+
+        tabla.addEventListener('click', (e) => {
+            const celda = e.target;
+
+            if (celda.tagName !== 'TD') return; // Solo celdas
+
+            const contenidoOriginal = celda.innerHTML;
+
+            // Evitamos crear más de un textarea
+            if (celda.querySelector('textarea')) return;
+
+            const textarea = document.createElement('textarea');
+            textarea.value = contenidoOriginal;
+
+            celda.innerHTML = '';
+            celda.appendChild(textarea);
+            textarea.focus();
+
+            let contenidoGuardado = false; // bandera para controlar blur
+
+
+            // Guardar con Enter
+            textarea.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    event.preventDefault(); // Evita salto de línea
+                    celda.innerHTML = textarea.value;
+                    contenidoGuardado = true; // marcamos que ya se guardó
+
+                }
+            });
+            // Cancelar si se pierde el foco
+            textarea.addEventListener('blur', () => {
+                celda.innerHTML = contenidoOriginal;
+            });
+        });
+    </script>
+
+</body>
+
+</html>
