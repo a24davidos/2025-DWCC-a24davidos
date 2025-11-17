@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border: 1px solid black;
+      padding: 4px;
+    }
+
+    th {
+      cursor: pointer;
+    }
+
+    th:hover {
+      background: yellow;
+    }
+  </style>
+</head>
+
+<body>
+  <table id="grid">
+    <thead>
+      <tr>
+        <th data-type="number">Age</th>
+        <th data-type="string">Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>5</td>
+        <td>John</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Pete</td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td>Ann</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>Eugene</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Ilya</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script defer>
+
+    const table = document.getElementsByTagName("table")[0];
+
+    const thead = table.tHead
+    const tbody = document.querySelector("tbody");
+    const trs = tbody.getElementsByTagName("tr");
+
+
+    thead.addEventListener("click", (e) => {
+        console.log(e.target);
+        //Cojo el tipo de dato
+        const tipoDato = e.target.dataset.type;
+        //Cojo el indice
+        const indice = e.target.cellIndex
+        
+        const trsArray = Array.from(trs);
+
+        if(tipoDato === "string"){
+            trsArray.sort((a,b) => {
+                const td1 = a.children[indice].innerText;
+                const td2 = b.children[indice].innerText;
+                return td1.localeCompare(td2)
+            })
+        } else{
+            trsArray.sort((a,b) =>  a.children[indice].innerText - b.children[indice].innerText)
+        }
+
+        trsArray.forEach((x) => tbody.append(x))
+        
+    })
+    
+    
+    
+
+  </script>
+</body>
+
+</html>
