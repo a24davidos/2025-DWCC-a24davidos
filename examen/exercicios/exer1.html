@@ -33,7 +33,7 @@
     const id = document.getElementsByClassName("a")
 
     console.log(a);
-    console.log(a.style["width"]= "300px");
+    console.log(a.style.width)
     
     const ancho = document.getElementById("ancho")
     console.log(ancho);
@@ -41,7 +41,7 @@
     const alto = document.getElementById("alto")
 
     ancho.addEventListener("input", () => {
-        a.style["width"] = ancho.value + "px"
+        a.style.width = ancho.value + "px"
         console.log("hola");
     })
 

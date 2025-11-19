@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lista Compra</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 400px;
+      margin: 10px auto;
+      text-align: center;
+      background-color: rgb(241, 241, 241);
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .compra {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      margin: 0px;
+      border: 1px solid black;
+      border-radius: 5px;
+    }
+
+    #textinput {
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 1em;
+    }
+
+    #engadir {
+      width: 40%;
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: black;
+      color: white;
+      font-weight: bold;
+      border: 1px solid black;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+
+    button {
+      background-color: transparent;
+      border: 0;
+    }
+
+
+
+    form {
+      display: flex;
+      flex-direction: column;
+
+    }
+
+    #filter {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+      background-color: transparent;
+      border: 0;
+      border-bottom: 1px solid gray;
+      font-size: 1em;
+
+    }
+
+
+    #container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .remove-button {
+      font-size: 1em;
+      cursor: pointer;
+      color: red;
+    }
+
+    #remove-all {
+      border: 1px solid black;
+      border-radius: 5px;
+      cursor: pointer;
+      display: grid;
+      width: 100%;
+      padding: 10px;
+    }
+
+    p{
+      cursor: pointer;
+    }
+
+    .hidden{
+      display: none;
+    }
+
+    .editar{
+      font-weight: bold;
+      border: 4px solid black;
+    }
+
+
+  </style>
+</head>
+
+<body>
+  <h1>Lista Compra</h1>
+  <form id="form">
+    <input type="text" id="textinput" placeholder="Introduce un elemento" />
+    <input type="button" id="engadir" value="+ Engadir Elemento" />
+  </form>
+
+  <input type="text" id="filter" placeholder="Filter Items">
+
+  <div id="container">
+<!--     <div class="compra">
+        <p>Manzanas</p>
+        <button class="remove-button">X</button>
+    </div>
+    <div class="compra">
+        <p>Pera</p>
+        <button class="remove-button">X</button>
+    </div>
+    <div class="compra">
+        <p>Pan</p>
+        <button class="remove-button">X</button>
+    </div>
+    <div class="compra">
+        <p>Verdura</p>
+        <button class="remove-button">X</button>
+    </div> -->
+  </div>
+  <button id="remove-all">Borrar todo</button>
+
+</body>
+<script src="listacompra2.js"></script>
+
+</html>

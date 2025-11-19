@@ -58,38 +58,50 @@
 
   <script defer>
 
-    const table = document.getElementsByTagName("table")[0];
+    const tabla = document.getElementById("grid")
+    const thead = document.getElementsByTagName("thead")[0]
+    const tbody = document.getElementsByTagName("tbody")[0]
+    const trs = tbody.getElementsByTagName("tr")
+    console.log(trs);
 
-    const thead = table.tHead
-    const tbody = document.querySelector("tbody");
-    const trs = tbody.getElementsByTagName("tr");
 
+    console.log(tabla);
+    console.log(thead);
 
     thead.addEventListener("click", (e) => {
-        console.log(e.target);
-        //Cojo el tipo de dato
-        const tipoDato = e.target.dataset.type;
-        //Cojo el indice
-        const indice = e.target.cellIndex
-        
-        const trsArray = Array.from(trs);
 
-        if(tipoDato === "string"){
-            trsArray.sort((a,b) => {
-                const td1 = a.children[indice].innerText;
-                const td2 = b.children[indice].innerText;
-                return td1.localeCompare(td2)
-            })
-        } else{
-            trsArray.sort((a,b) =>  a.children[indice].innerText - b.children[indice].innerText)
-        }
+      const indice = e.target.cellIndex
+      const tipoDato = e.target.dataset.type
+      const trsArr = Array.from(trs)
 
-        trsArray.forEach((x) => tbody.append(x))
-        
+
+      if (tipoDato === "string") {
+        trsArr.sort((a, b) => {
+
+          trA = a.children[indice].innerText
+          trB = b.children[indice].innerText
+
+          return trA.localeCompare(trB)
+
+        })
+      } else {
+        trsArr.sort((a, b) => {
+          trA = a.children[indice].innerText
+          trB = b.children[indice].innerText
+
+          return trA - trB
+
+        })
+
+      }
+
+      trsArr.forEach((x) => tbody.append(x))
+
     })
-    
-    
-    
+
+
+
+
 
   </script>
 </body>

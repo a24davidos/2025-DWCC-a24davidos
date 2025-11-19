@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario con almacenamiento local</title>
+    <style>
+
+
+    </style>
+</head>
+
+<body>
+    <h1>Formulario de ejemplo</h1>
+    <form id="miFormulario">
+        <!-- Campos de texto -->
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre">
+        <br>
+
+        <label for="email">Correo electrónico:</label>
+        <input type="text" id="email" name="email">
+
+        <!-- Botones de radio -->
+        <div class="radio-group">
+            <label>Género:</label>
+            <input type="radio" id="genero_m" name="genero" value="masculino">
+            <label for="genero_m">Masculino</label>
+            <input type="radio" id="genero_f" name="genero" value="femenino">
+            <label for="genero_f">Femenino</label>
+        </div>
+
+        <!-- Checkboxes -->
+        <div class="checkbox-group">
+            <label>Aficiones:</label>
+            <input type="checkbox" id="aficion_lectura" name="aficiones" value="lectura">
+            <label for="aficion_lectura">Lectura</label>
+            <input type="checkbox" id="aficion_deporte" name="aficiones" value="deporte">
+            <label for="aficion_deporte">Deporte</label>
+            <input type="checkbox" id="aficion_musica" name="aficiones" value="musica">
+            <label for="aficion_musica">Música</label>
+        </div>
+
+        <button type="submit">Enviar</button>
+
+        <button id="recargar"> Recargar</button>
+    </form>
+</body>
+<script>
+
+    datos = {}
+
+    const nombre = document.getElementById("nombre");
+    const email = document.getElementById("email")
+    const submit = document.querySelector("button")
+    const genero_m = document.getElementById("genero_m")
+    const genero_f = document.getElementById("genero_f")
+    const checkboxes = document.querySelectorAll('input[name="aficiones"]');
+    const recargar = document.getElementById("recargar")
+    const aficionesSeleccionadas = [];
+
+
+
+    submit.addEventListener("click", (e) => {
+        e.preventDefault()
+
+        let generoSeleccionado = ""
+
+        if (genero_m.checked) {
+            generoSeleccionado = "genero_m"
+        } else {
+            generoSeleccionado = "genero_f"
+        }
+
+        if (checkboxes) {
+            const checkboxesArr = Array.from(checkboxes)
+            checkboxesArr.forEach((x => {
+                if (x.checked) {  // solo las que estén marcadas
+                    aficionesSeleccionadas.push(x.value);
+                }
+            }))
+
+
+            console.log(nombre.value);
+
+            datos = {
+                nombre: nombre.value,
+                email: email.value,
+                genero: generoSeleccionado,
+                aficiones: aficionesSeleccionadas  // aquí pasamos el array
+            }
+            
+            const datosJson = JSON.stringify(datos)
+
+            //Función para guardar
+            localStorage.setItem("datosForm", datosJson)
+
+        }
+
+
+    })
+
+    const datosDeVuelta = JSON.parse(localStorage.getItem("datosForm"))
+
+    console.log(datosDeVuelta.aficiones[1]);
+        
+    
+
+
+</script>
+
+</html>
