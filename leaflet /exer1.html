@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html,
+      body {
+        width: 100vw;
+        height: 100vh;
+        margin: 0 auto;
+        box-sizing: border-box;
+        display: flex;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      #map {
+        flex: 2;
+      }
+      .legend {
+        padding: 10px 14px;
+        background-color: rgba(245, 245, 220, 0.8);
+        border: 1px solid grey;
+      }
+
+      #texto {
+        border: 1px solid black;
+        flex: 1;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 50px;
+      }
+
+      .card-coordenada {
+        display: flex;
+        justify-content: space-between;
+
+        padding: 0 1em;
+        border: 1px solid black;
+        border-radius: 10px;
+        width: 50%;
+      }
+
+      .card-coordenada div {
+        text-align: left;
+      }
+
+      button {
+        padding: 0;
+        margin: 0;
+        border: none;
+        background-color: transparent;
+        font-size: 1.5em;
+        color: red;
+        cursor: pointer;
+      }
+    </style>
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      crossorigin=""
+    ></script>
+  </head>
+  <body>
+    <div id="texto">
+      <h2>Coordenadas:</h2>
+    </div>
+    <div id="map"></div>
+    <script>
+      const texto = document.getElementById("texto");
+
+      function crearCard() {
+        let divPadre = document.createElement("div");
+        let divHijo = document.createElement("div");
+        let p1 = document.createElement("p");
+        let p2 = document.createElement("p");
+        let button = document.createElement("button");
+
+        divPadre.classList.add("card-coordenada");
+        button.innerText = "X";
+        p1.innerHTML = "<strong>Coordenada</strong>";
+        p2.innerText = "Descripcion";
+
+        divHijo.appendChild(p1);
+        divHijo.appendChild(p2);
+
+        divPadre.appendChild(divHijo);
+        divPadre.appendChild(button);
+
+        texto.appendChild(divPadre);
+      }
+
+      crearCard();
+
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          function (posicion) {
+            const { latitude, longitude } = posicion.coords;
+
+            const map = L.map("map").setView([latitude, longitude], 13);
+
+            L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+              maxZoom: 19,
+              attribution:
+                '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            }).addTo(map);
+
+            //esto para crear el marcardor principal
+            let marcador = L.marker([latitude, longitude])
+              .addTo(map)
+              .bindPopup(
+                `Latitude: ${latitude.toFixed(
+                  6
+                )}, Longitude: ${longitude.toFixed(6)}`
+              )
+              .openPopup();
+
+            function onMapClick(e) {
+              //Con esto movo o marcador a unha nova posición
+              marcador.setLatLng([e.latlng.lat, e.latlng.lng]);
+
+              // Con esto cambiolle o pop up que vai ligado a el
+              marcador
+                .bindPopup(
+                  `Latitude: ${e.latlng.lat.toFixed(
+                    6
+                  )}, Longitude: ${e.latlng.lng.toFixed(6)}`
+                )
+                .openPopup();
+            }
+            map.on("click", onMapClick);
+          },
+
+          function (error) {
+            console.log(`ERROR(${error.code}): ${error.message}`);
+          }
+        );
+      }
+    </script>
+  </body>
+</html>
