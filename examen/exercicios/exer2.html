@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="gl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Div Editable</title>
+    <style>
+        /* Estilo do div */
+        #editableDiv {
+            width: 300px;
+            height: 150px;
+            border: 1px solid #333;
+            padding: 10px;
+            box-sizing: border-box;
+            cursor: pointer;
+            overflow: auto;
+        }
+
+        /* Estilo do textarea */
+        #editableTextarea {
+            width: 300px;
+            height: 150px;
+            box-sizing: border-box;
+            padding: 10px;
+            font-family: inherit;
+            font-size: inherit;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="editableDiv">Fai clic aquí para editar este texto.</div>
+
+    <script defer>
+        //Función que me permite hacer editablle el nuevo div
+        function makeEditable(div) {
+            div.addEventListener('click', () => {
+                const textarea = document.createElement("textarea");
+                textarea.value = div.innerText;
+                textarea.id = "editableTextarea";
+
+                //Esto vale para reemplazar
+                div.replaceWith(textarea);
+                textarea.focus();
+
+                const replaceWithDiv = () => {
+                    const newDiv = document.createElement("div");
+                    newDiv.innerText = textarea.value;
+                    newDiv.id = "editableDiv"
+                    textarea.replaceWith(newDiv);
+
+                    // Vuelve a hacer editable el nuevo div
+                    makeEditable(newDiv);
+                };
+
+                textarea.addEventListener('blur', replaceWithDiv);
+                textarea.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        replaceWithDiv();
+                    }
+                });
+            });
+        }
+
+        // Aplicar al div inicial
+        const div = document.getElementById('editableDiv');
+        makeEditable(div);
+
+
+    </script>
+</body>
+
+</html>
