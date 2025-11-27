@@ -57,8 +57,12 @@ xhr.addEventListener("load", function () {
   console.log(`Hai ${gatiños} gatiños: ${femias} femias e ${machos} machos`);
 
   /* Gato de la segunda forma */
+  /* Permite aplanar */
   const gatiñosMap = obxetoJSON.flatMap((gato) => gato.kittens);
+  const gatiñosMap2 = obxetoJSON.map((gato) => gato.kittens);
+
   console.log(gatiñosMap);
+  console.log(gatiñosMap2);
 
   console.log(
     `Hai ${gatiñosMap.length} gatiños: ${
