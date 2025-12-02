@@ -20,7 +20,40 @@
 
     </section>
 
-    <script>
+    <script defer>
+        //Collo a referencia
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json")
+
+        xhr.send();
+
+        xhr.addEventListener("load", function () {
+            const obxeto = xhr.response;
+            obxetoJSON = JSON.parse(xhr.response)
+
+            console.log(obxetoJSON);
+        })
+
+        function crearHeader() {
+
+            const header = document.getElementsByTagName("header")
+
+            const h1 = document.createElement("h1")
+            h1.innerText = obxetoJSON.squadName
+
+            const p = document.createElement("p")
+            p.innerText = `Hometown: ${obxetoJSON.homeTown} Formed: ${obxetoJSON.formed}`
+
+
+
+            header.append(h1)
+            header.append(p)
+
+
+        }
+
+        crearHeader()
+
 
     </script>
 </body>
