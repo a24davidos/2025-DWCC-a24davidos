@@ -5,37 +5,117 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exer 2 - API FETCH</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: auto 0;
+            padding: 0;
+        }
+
+        body {
+            text-align: center;
+            margin: 1em;
+        }
+
+
+
+        #container {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #container>* {
+            margin-bottom: 10px;
+        }
+
+
+        img {
+            width: 100px;
+            margin: 10px;
+        }
+    </style>
 </head>
 
 <body>
-    <script defer>
+    <h1>Random user</h1>
+    <div id="container"></div>
 
+    <button id="nuevoUsuario">Cargar nuevo usuario</button>
+
+    <script defer>
         function nome(data) {
-            return `${data.first} ${data.last}`
+            return `${data.name.first} ${data.name.last}`;
         }
 
         function correo(data) {
-            return `${data.email}`
+            return `${data.email}`;
         }
 
         function telefono(data) {
-            return `${data.cell}`
+            return `${data.cell}`;
         }
 
         function cidade(data) {
-            return `${data.location.city}`
+            return `${data.location.city}`;
         }
 
         function country(data) {
-            return `${data.location.country}`
+            return `${data.location.country}`;
         }
 
-        fetch("https://randomuser.me/api")
-            .then(reponse => reponse.json())
-            .then(data => {
-                console.log(data.results[0]);
+        function age(data) {
+            return `${data.dob.age}`;
+        }
 
+        function img(data) {
+            return `${data.picture.medium}`;
+        }
+
+        function crearUsuario(data) {
+            const container = document.getElementById("container");
+
+            const userHTML = `
+                    <img src="${img(data)}" alt="Foto de ${nome(data)}">
+                    <h2>${nome(data)}</h2>
+                    <p>Email: ${correo(data)}</p>
+                    <p>Teléfono: ${telefono(data)}</p>
+                    <p>Edad: ${age(data)}</p>
+                    <p>Ciudad: ${cidade(data)}</p>
+                    <p>País: ${country(data)}</p>
+            `;
+
+            container.innerHTML = userHTML;
+        }
+
+        function cargarUsuario() {
+            fetch("https://randomuser.me/api")
+                .then(response => response.json())
+                .then(data => {
+                    const user = data.results[0];
+                    crearUsuario(user);
+                })
+                .catch(error => console.error("Error al obtener el usuario:", error));
+        }
+
+
+        // Fetch del usuario al cargar la página
+        fetch("https://randomuser.me/api")
+            .then(response => response.json())
+            .then(data => {
+                const user = data.results[0];
+                crearUsuario(user);
             })
+            .catch(error => console.error("Error al obtener el usuario:", error));
+
+
+        const nuevoUsuario = document.getElementById("nuevoUsuario")
+
+        nuevoUsuario.addEventListener("click", () => {
+            cargarUsuario()
+        })
+
     </script>
 </body>
 
