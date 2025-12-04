@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exer 1 - API FETCH</title>
+</head>
+
+<body>
+
+    <script defer>
+
+        let informacion
+
+        fetch("https://mdn.github.io/learning-area/javascript/oojs/tasks/json/sample.json")
+            .then(response => response.json()) // retornamos la promesa de json
+            .then(data => {
+                console.log(data);
+
+                //Devolver todos los nombres de los kittens
+                let nombres = data.map((g) => g.name);
+                let ultimo = nombres.pop()
+
+                console.log(
+                    nombres.length > 0 ? nombres.join(", ") + " e " + ultimo : ultimo + "."
+                );
+
+                //Devolver cantidade de gatiños
+
+                const gatiñosMap = data.flatMap((g) => g.kittens)
+                const gatiñasL = gatiñosMap.filter((g) => g.gender === "f").length
+
+                console.log(
+                    `Hai ${gatiñosMap.length} gatiños: ${gatiñasL} femias e ${gatiñosMap.length - gatiñasL} machos`
+                );
+
+
+
+            })
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
