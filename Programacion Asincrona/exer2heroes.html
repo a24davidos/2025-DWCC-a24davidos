@@ -3,9 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-
     <title>Our superheroes</title>
-
     <link href="https://fonts.googleapis.com/css?family=Faster+One" rel="stylesheet">
     <link rel="stylesheet" href="exer2heroes.css">
 </head>
@@ -13,48 +11,44 @@
 <body>
 
     <header>
-
     </header>
 
     <section>
-
     </section>
 
     <script defer>
-        //Collo a referencia
-        const xhr = new XMLHttpRequest();
-        xhr.open("GET", "https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json")
+        let obxetoJSON; // variable global para almacenar el JSON
 
-        xhr.send();
-
-        xhr.addEventListener("load", function () {
-            const obxeto = xhr.response;
-            obxetoJSON = JSON.parse(xhr.response)
-
-            console.log(obxetoJSON);
-        })
-
+        // Función para crear el header
         function crearHeader() {
+            const header = document.querySelector("header"); // seleccionamos el header correctamente
 
-            const header = document.getElementsByTagName("header")
+            const h1 = document.createElement("h1");
+            h1.innerText = obxetoJSON.squadName;
 
-            const h1 = document.createElement("h1")
-            h1.innerText = obxetoJSON.squadName
+            const p = document.createElement("p");
+            p.innerText = `Hometown: ${obxetoJSON.homeTown} Formed: ${obxetoJSON.formed}`;
 
-            const p = document.createElement("p")
-            p.innerText = `Hometown: ${obxetoJSON.homeTown} Formed: ${obxetoJSON.formed}`
-
-
-
-            header.append(h1)
-            header.append(p)
-
-
+            header.appendChild(h1);
+            header.appendChild(p);
         }
 
-        crearHeader()
+        // Crear el XMLHttpRequest
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json");
 
+        xhr.addEventListener("load", function () {
+            if (xhr.status === 200) {
+                obxetoJSON = JSON.parse(xhr.responseText); // parseamos el JSON
+                console.log(obxetoJSON);
 
+                crearHeader();
+            } else {
+                console.error("Error cargando el JSON:", xhr.status);
+            }
+        });
+
+        xhr.send();
     </script>
 </body>
 
