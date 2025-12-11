@@ -100,21 +100,18 @@
         }
 
 
-        // Fetch del usuario al cargar la página
-        fetch("https://randomuser.me/api")
-            .then(response => response.json())
-            .then(data => {
-                const user = data.results[0];
-                crearUsuario(user);
-            })
-            .catch(error => console.error("Error al obtener el usuario:", error));
-
-
         const nuevoUsuario = document.getElementById("nuevoUsuario")
 
         nuevoUsuario.addEventListener("click", () => {
             cargarUsuario()
         })
+
+
+        //Primera vez que carga o usuario
+        cargarUsuario()
+
+
+
 
     </script>
 </body>
