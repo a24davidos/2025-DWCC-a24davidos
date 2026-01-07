@@ -1,0 +1,1 @@
+1. Revisar tema de valores, valor obligatorio, o que sino le pasas nada coge uno por defecto. Esto me lió en el examen,,
