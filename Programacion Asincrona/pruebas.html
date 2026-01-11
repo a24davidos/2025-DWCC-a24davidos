@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let promise = new Promise((resolve, reject) => {
+            setTimeout(() => resolve({ titulo: 'Título 1' }), 1000);
+        });
+        async function getPromise() {
+            //let promise.then((result) => console.log(result));
+            // a liña anterior é equivalente ao seguinte
+            let result = await promise; // espera ata que a promesa se resolva
+            console.log(result);
+        }
+        console.log('O código non se bloquea');
+        getPromise();
+        console.log('O código continúa');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 2. Dado o seguinte código, escribe o corpo da función imprimirResultado() para que chame á función wait e imprima o resultado da promesa que devolve
+
+        async function wait() {
+            await new Promise((resolve) => setTimeout(resolve, 3000));
+            return 10;
+        }
+
+        function imprimirResultado() {
+            wait().then(console.log);
+        }
+
+        imprimirResultado()
+
+    </script>
+</body>
+
+</html>

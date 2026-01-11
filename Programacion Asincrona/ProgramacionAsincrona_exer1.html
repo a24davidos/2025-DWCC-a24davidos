@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //1. Reescribe o codigo usando async/await
+        async function loadJson(url) {
+            // Inicio de la función async → se ejecuta inmediatamente al llamarla
+            // Devuelve siempre una promesa, aunque no haya return explícito
+
+            const response = await fetch(url);
+            // await pausa la ejecución de esta función solo aquí
+            // hasta que fetch devuelva la respuesta
+            // Mientras tanto, el resto del programa sigue ejecutándose
+
+            if (response.status !== 200) throw new Error(response.status);
+            // Si el status no es 200 → lanza un error
+            // Esto interrumpe la ejecución de la función y la promesa se rechaza
+            // Todo lo que esté después de este throw dentro de la función NO se ejecuta
+
+            return response.json();
+            // Devuelve los datos parseados en JSON
+            // Como la función es async, esto se envuelve automáticamente en una promesa
+            // Es decir, loadJson() devuelve una promesa que se resuelve con estos datos
+        }
+
+        console.log("Hola");
+        // Esto se ejecuta **inmediatamente**, no espera a loadJson
+        // La función async se ejecuta en paralelo
+
+        loadJson('https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json')
+            .then(data => console.log(data))
+            // Aquí accedemos a los datos cuando la promesa se resuelve
+            // Esto sucede **después de que fetch termine y response.json() devuelva los datos**
+            .catch(console.log);
+        // Captura errores tanto de red como del throw que pusimos si status ≠ 200
+
+        console.log("adios");
+        // Esto también se ejecuta **inmediatamente**, no espera a loadJson
+        // Solo cuando la promesa se resuelva o se rechace se ejecutará .then() o .catch()
+
+
+    </script>
+</body>
+
+</html>
