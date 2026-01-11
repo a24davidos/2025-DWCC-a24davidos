@@ -95,6 +95,7 @@
             posts.forEach(post => crearTarefa(post))
         }
 
+        //Me confundi, actualizar era para pasar de completada a no completada y viceversa
         function actualizarTarefa(divEditando, nuevoTitulo) {
             const tituloSpan = divEditando.getElementsByClassName("titulo")[0]
             const id = divEditando.dataset.id
