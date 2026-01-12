@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            margin: 0 auto;
+            justify-content: center;
+            align-content: center;
+        }
+
+        #tabla tr {
+            cursor: pointer;
+        }
+
+        #tabla tr:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<div id="container">
+    <h1>Municipios</h1>
+    <label for="buscador"><strong>Introduzca su municipio:</strong></label>
+    <input type="text" name="buscador" id="buscador" placeholder="Ej. Betanzos, Lugo...">
+    <table border="2px" id="tabla">
+
+    </table>
+</div>
+
+<body>
+    <script>
+        const tabla = document.getElementById("tabla");
+        const buscador = document.getElementById("buscador");
+
+        async function cargarMunicipios() {
+            const response = await fetch('municipios.json');
+            const data = await response.json();
+
+            data.forEach(municipio => crearRow(municipio));
+
+            //Filtro 
+            buscador.addEventListener("input", (e) => {
+                tabla.innerHTML = "";
+                const valor = e.target.value.toLowerCase();
+
+                for (const municipio of data) {
+                    if (municipio.Capitalidad.toLowerCase().startsWith(valor)) {
+                        crearRow(municipio);
+                    }
+                }
+            });
+        }
+
+        cargarMunicipios();
+
+        function crearRow(data) {
+            const tr = document.createElement("tr");
+            const td = document.createElement("td");
+
+            td.innerText = data.Capitalidad;
+            tr.append(td);
+
+            tr.addEventListener("click", () => mostrarDetalle(data));
+            tabla.append(tr);
+        }
+
+        function mostrarDetalle(municipio) {
+            alert(`
+                Detalles de ${municipio.Capitalidad}
+                Provincia: ${municipio["Provincia"]}
+                Habitantes: ${municipio["Habitantes"]}
+            `);
+        }
+    </script>
+
+</body>
+
+</html>
