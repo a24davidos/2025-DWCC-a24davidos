@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reactividad Profunda - Vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+</head>
+
+<body>
+
+    <div id="app">
+        <h2>Reactividad Profunda</h2>
+
+        <!-- Mostrar valores reactivos -->
+        <p><strong>Contador anidado:</strong> {{ obj.nested.count }}</p>
+        <p><strong>Array:</strong> {{ obj.arr }}</p>
+
+        <!-- Botón para cambiar valores -->
+        <button @click="cambiar">Incrementar contador y añadir al array</button>
+    </div>
+
+    <script>
+    "use strict"
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    obj: {
+                        nested: { count: 0 },
+                        arr: ["foo", "bar"]
+                    }
+                }
+            },
+            methods: {
+                cambiar() {
+                    // Cambiamos un valor dentro de un objeto anidado
+                    this.obj.nested.count++;
+
+                    // Cambiamos un array dentro del objeto
+                    this.obj.arr.push(this.obj.nested.count);
+                }
+            }
+        }).mount('#app');
+    </script>
+
+</body>
+
+</html>

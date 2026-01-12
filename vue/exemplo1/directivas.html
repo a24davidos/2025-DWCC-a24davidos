@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apuntes Vue: v-bind y v-model</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    input, select { margin: 10px 0; padding: 5px; }
+    a { display: block; margin-top: 10px; color: blue; }
+  </style>
+</head>
+<body>
+
+<div id="app">
+  <h2>Apuntes Vue: v-bind y v-model</h2>
+
+  <!-- SELECT para elegir atributo dinámico -->
+  <label>Elige un atributo para el enlace:</label>
+  <select v-model="atributo">
+    <option value="href">href</option>
+    <option value="title">title</option>
+    <option value="id">id</option>
+  </select>
+
+  <!-- INPUT para cambiar el valor -->
+  <label>Escribe un valor para el atributo:</label>
+  <input type="text" v-model="url" placeholder="Ej: https://www.google.com o Texto para title">
+
+  <!-- ENLACE con atributo dinámico usando v-bind -->
+  <a v-bind:[atributo]="url">Haz clic aquí</a>
+
+  <!-- Mostrar valores actuales -->
+  <p><strong>atributo seleccionado:</strong> {{ atributo }}</p>
+  <p><strong>valor actual:</strong> {{ url }}</p>
+
+  <hr>
+  <h3>Notas rápidas:</h3>
+  <ul>
+    <li><strong>v-bind</strong>: enlaza un atributo HTML con un valor de Vue (solo Vue → HTML).</li>
+    <li><strong>v-model</strong>: enlaza un input o select de manera bidireccional (Vue ↔ HTML).</li>
+    <li>Con <code>v-bind:[atributo]</code> puedes elegir dinámicamente qué atributo actualizar.</li>
+    <li>Con <code>v-model</code> cualquier cambio en el input o select se refleja automáticamente en Vue.</li>
+  </ul>
+</div>
+
+<script>
+  Vue.createApp({
+    data() {
+      return {
+        atributo: 'href', // atributo inicial
+        url: 'https://www.google.com' // valor inicial
+      }
+    }
+  }).mount('#app');
+</script>
+
+</body>
+</html>

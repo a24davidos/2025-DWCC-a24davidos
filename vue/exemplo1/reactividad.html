@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reactividad en Vue</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+<div id="app">
+  <p>Nombre: {{ nombre }}</p>
+  <button @click="cambiarNombre">Cambiar nombre</button>
+</div>
+
+<script>
+const app = Vue.createApp({
+  data() {
+    return {
+      nombre: 'Juan'
+    }
+  },
+  methods: {
+    cambiarNombre() {
+      this.nombre = 'Ana'; // usamos this para acceder a la propiedad reactiva
+      console.log(this.nombre); // "Ana"
+    }
+  }
+})
+
+app.mount('#app')
+</script>
+
+</body>
+</html>
