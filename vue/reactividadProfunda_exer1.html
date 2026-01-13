@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,49 +10,51 @@
 
   </style>
 </head>
+
 <body>
 
-<div id="app">
-  <h2>Exer 1 - Reactividade profudna</h2>
-  
-  <p>Nombre: {{ nombre }}</p>
-  
-  <p>ano actual: {{ ano }}</p>
-  
-  <p>ano actual + 5: {{ ano + 5 }}</p>
-  
-  <p>Imagen usando :src:</p>
-  <img :src="imagen" width="200px" alt="Imagen de ejemplo">
+  <div id="app">
+    <h2>Exer 1 - Reactividade profudna</h2>
 
-  <p>Imagen usando v-html:</p>
-  <div v-html="imagenHTML"></div>
+    <p>Nombre: {{ nombre }}</p>
 
-  <!-- V-model permite crear un enlace bidireccional que actualiza vue automatico -->
-  <p>Mi nombre en la caja de texto:</p>
-  <input type="text" v-model="nombre">
+    <p>ano actual: {{ ano }}</p>
 
-  <p>Contador: {{ contador }}</p>
-  
-  <!-- Botones para incrementar y decrementar -->
-  <button @click="contador++">Incrementar</button>
-  <button @click="contador--">Decrementar</button>
-</div>
+    <p>ano actual + 5: {{ ano + 5 }}</p>
 
-<script>
-const { createApp } = Vue;
+    <p>Imagen usando :src:</p>
+    <img :src="imagen" width="200px" alt="Imagen de ejemplo">
 
-createApp({
-  data() {
-    return {
-      nombre: 'David', 
-      ano: new Date().getFullYear(),
-      imagen: 'https://f4.bcbits.com/img/a3992891009_16.jpg', 
-      imagenHTML: '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8Hg5u--jsG4SaDME64AJeRlAuctoEaULu4w&s" alt="Imagen con v-html">', 
-      contador: 0
-    }
-  }
-}).mount('#app');
-</script>
+    <p>Imagen usando v-html:</p>
+    <div v-html="imagenHTML"></div>
+
+    <!-- V-model permite crear un enlace bidireccional que actualiza vue automatico -->
+    <p>Mi nombre en la caja de texto:</p>
+    <input type="text" v-model="nombre">
+
+    <p>Contador: {{ contador }}</p>
+
+    <!-- Botones para incrementar y decrementar -->
+    <button @click="contador++">Incrementar</button>
+    <button @click="contador--">Decrementar</button>
+  </div>
+
+  <script>
+    const { createApp } = Vue;
+
+    createApp({
+      data() {
+        return {
+          nombre: 'David',
+          ano: new Date().getFullYear(),
+          imagen: 'https://f4.bcbits.com/img/a3992891009_16.jpg',
+          imagenHTML: '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8Hg5u--jsG4SaDME64AJeRlAuctoEaULu4w&s" alt="Imagen con v-html">',
+          contador: 0
+        }
+      },
+    }).mount('#app');
+  </script>
 
 </body>
+
 </html>

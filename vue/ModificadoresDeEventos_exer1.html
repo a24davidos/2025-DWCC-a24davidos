@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificadores de Eventos</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <h3>Click con la rueda del ratón:</h3>
+        <button @click.middle="mensaxe()">Imprimir mensaxe</button>
+        <h3>Caixa de texto onde ao pulsar calquera tecla se mostre o texto actual da caixa</h3>
+        <input type="text" v-model="texto" placeholder="Escribe aquí">
+        <input type="text" :value="texto" placeholder="Salida aquí">
+        <h3>Otra forma de hacerlo</h3>
+        <input type="text" @keydown="actualizar" placeholder="Escribe aquí">
+        <input type="text" :value="texto" placeholder="Salida aquí">
+
+    </div>
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    texto: ""
+                }
+            },
+            methods: {
+                mensaxe() {
+                    console.log("Ola");
+                },
+                //Otra forma de hacerlo:
+                actualizar(event) {
+                    this.texto = event.target.value;
+                }
+            }
+        }).mount('#app');
+    </script>
+
+</body>
+
+</html>
