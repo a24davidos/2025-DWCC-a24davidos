@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Ejemplos de v-model en Vue</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    section {
+      margin-bottom: 30px;
+    }
+
+    label {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+
+    <!--NOTA: v-model ignorará os valores dos atributos value, checked ou selected dos
+    elementos dun formulario engadidos en HTML. É dicir, terá prioridade a o estado definido en
+    JavaScript como propiedade do obxecto devolto por data(). -->
+
+    <!-- ====================== Input de texto ====================== -->
+    <section>
+      <h2>Input de texto</h2>
+      <p>Message is: {{ messageText }}</p>
+      <!-- v-model enlaza automáticamente el valor del input con messageText -->
+      <input v-model="messageText" placeholder="Edit me" />
+    </section>
+
+    <!-- ====================== Área de texto ====================== -->
+    <section>
+      <h2>Área de texto (textarea)</h2>
+      <span>Multiline message is:</span>
+      <!-- style "white-space: pre-line" conserva saltos de línea -->
+      <p style="white-space: pre-line;">{{ messageTextArea }}</p>
+      <textarea v-model="messageTextArea" placeholder="Add multiple lines"></textarea>
+    </section>
+
+    <!-- ====================== Checkbox único ====================== -->
+    <section>
+      <h2>Checkbox único</h2>
+      <!-- v-model enlaza con una variable booleana -->
+      <input type="checkbox" id="checkbox" v-model="checkedSingle" />
+      <label for="checkbox">{{ checkedSingle }}</label>
+    </section>
+
+    <!-- ====================== Checkbox múltiple ====================== -->
+    <section>
+      <h2>Checkbox múltiple</h2>
+      <p>Selected fruits: {{ selectedFruits.join(', ') }}</p>
+      <!-- v-model enlaza con un array para seleccionar varios valores -->
+      <input type="checkbox" id="apple" value="Apple" v-model="selectedFruits" />
+      <label for="apple">Apple</label>
+      <input type="checkbox" id="banana" value="Banana" v-model="selectedFruits" />
+      <label for="banana">Banana</label>
+      <input type="checkbox" id="orange" value="Orange" v-model="selectedFruits" />
+      <label for="orange">Orange</label>
+    </section>
+
+    <!-- ====================== Radio buttons ====================== -->
+    <section>
+      <h2>Radio buttons</h2>
+      <p>Picked: {{ pickedOption }}</p>
+      <!-- v-model enlaza con una variable que tomará el valor del radio seleccionado -->
+      <input type="radio" id="one" value="One" v-model="pickedOption" />
+      <label for="one">One</label>
+      <input type="radio" id="two" value="Two" v-model="pickedOption" />
+      <label for="two">Two</label>
+      <input type="radio" id="three" value="Three" v-model="pickedOption" />
+      <label for="three">Three</label>
+    </section>
+  </div>
+
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          // Para el input de texto
+          messageText: "Hola Vue!",
+
+          // Para el textarea
+          messageTextArea: "Primera línea\nSegunda línea",
+
+          // Checkbox único
+          checkedSingle: false,
+
+          // Checkbox múltiple
+          selectedFruits: [],
+
+          // Radio buttons
+          pickedOption: null
+        }
+      }
+    });
+
+    app.mount('#app');
+  </script>
+</body>
+
+</html>

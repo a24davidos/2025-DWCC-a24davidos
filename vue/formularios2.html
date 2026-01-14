@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo Select con v-model</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+<div id="app">
+    <h2>Escolla unha opción</h2>
+
+    <!-- Mostra o valor seleccionado -->
+    <p>Opción seleccionada: {{ selected }}</p>
+
+    <!-- Select con v-model -->
+    <select v-model="selected">
+        <!-- Opción por defecto deshabilitada -->
+        <option disabled value="">Please select one</option>
+        <!-- Opciones reais -->
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+    </select>
+</div>
+
+<script>
+const { createApp } = Vue;
+
+createApp({
+    data() {
+        return {
+            selected: "" // Estado inicial "unselected"
+        }
+    }
+}).mount('#app');
+</script>
+</body>
+</html>

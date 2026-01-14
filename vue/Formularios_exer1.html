@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo Select con v-model</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        div {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        form {
+            border: 1px solid black;
+            background-color: rgb(231, 231, 231);
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            padding: 10px;
+            border-radius: 10px;
+
+        }
+
+        form>* {
+            margin-bottom: 10px;
+        }
+
+        section {
+            border: 1px solid black;
+            width: 300px;
+            padding: 10px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <form>
+            <label for="input">Input:</label>
+            <input type="text" v-model="input">
+            <label for="">Text-area:</label>
+            <textarea v-model="area"></textarea>
+            <p>Checkbox:</p>
+            <label>
+                Apple
+                <input type="checkbox" value="Apple" v-model="selectedFruits">
+            </label>
+            <label>
+                Banana
+                <input type="checkbox" value="Banana" v-model="selectedFruits">
+            </label>
+            <label>
+                Orange
+                <input type="checkbox" value="Orange" v-model="selectedFruits">
+            </label>
+            <p>Radio buttons:</p>
+            <label>
+                One
+                <input type="radio" id="one" value="One" v-model="pickedOption" />
+            </label>
+            <label>
+                Two
+                <input type="radio" id="two" value="Two" v-model="pickedOption" />
+            </label>
+            <label>
+                Three
+                <input type="radio" id="three" value="Three" v-model="pickedOption" />
+            </label>
+            <p>Selecciona una:</p>
+            <select v-model="selected">
+                <!-- Opción por defecto deshabilitada -->
+                <option disabled value="">Please select one</option>
+                <!-- Opciones reais -->
+                <option>A</option>
+                <option>B</option>
+                <option>C</option>
+            </select>
+
+            <button @click="limpiar">Clickame</button>
+
+        </form>
+
+        <section>
+            <p>Input: {{input}}</p>
+            <p>Text area: {{area}}</p>
+            <p>Checkbox: {{selectedFruits}}</p>
+            <p>Radio button: {{pickedOption}}</p>
+            <p>Option: {{selected}}</p>
+        </section>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    input: "",
+                    area: "",
+                    selectedFruits: [],
+                    pickedOption: "",
+                    selected: []
+                }
+            },
+            methods: {
+                limpiar(e){
+                    e.preventDefault()
+                    this.input = "";
+                    this.area = "",
+                    this.selectedFruits = [],
+                    this.pickedOption = "",
+                    this.selected = []
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>
