@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo Vue Componente</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <label>Km: </label>
+        <input type="number" v-model="km" min="0">
+        <label>Metros: </label>
+        <input type="number" v-model="m">
+
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    km: 0,
+                    m: 0
+                }
+            },
+            watch: {
+                km() {
+                    this.m = this.km * 1000
+                },
+                m() {
+                    this.km = this.m / 1000
+                }
+            }
+        }).mount('#app');
+    </script>
+
+</body>
+
+</html>

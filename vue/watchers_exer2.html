@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo Vue Componente</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <label>Numero 1:</label>
+        <input type="number" v-model="num1" min="0">
+        <label>Numero 2:</label>
+        <input type="number" v-model="num2" min="0">
+        <p>Total: {{total}}</p>
+        <p>O número é {{par}}</p>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    num1: 0,
+                    num2: 0,
+                    total: 0,
+                    par: ""
+                }
+            },
+            watch: {
+                num1() {
+                    this.total = this.num1 + this.num2
+                },
+                num2() {
+                    this.total = this.num1 + this.num2
+                },
+                total() {
+                    this.total % 2 == 0 ? this.par = "par" : this.par = "impar"
+                }
+            }
+        }).mount('#app');
+    </script>
+
+</body>
+
+</html>
