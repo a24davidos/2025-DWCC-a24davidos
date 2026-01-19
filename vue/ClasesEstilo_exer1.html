@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo Vue Componente</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        body {
+            display: flex;
+        }
+
+        main {
+            margin: 0 auto;
+        }
+
+        .apartadoA {
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1>Exercicio 1</h1>
+        <p :class="apartadoA">Probando exercicio 1</p>
+
+
+    </main>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    apartadoA: true
+                }
+            }
+        }).mount('#app');
+    </script>
+
+</body>
+
+</html>
