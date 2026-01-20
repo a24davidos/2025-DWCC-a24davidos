@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taboleiro</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+</head>
+
+<body>
+    <!doctype html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Exercicio 2</title>
+        <style>
+            .activo {
+                background-color: black;
+                color: white;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="app">
+            <table border="1">
+                <tr>
+                    <td :class="{activo: isActive[0]}" @click="toogleActive(0)">Zelda: Breath of the Wild</td>
+                    <td :class="{activo: isActive[1]}" @click="toogleActive(1)">Zelda: The tears of the Kingdom</td>
+                </tr>
+            </table>
+        </div>
+        <script>
+            const { createApp } = Vue;
+            createApp({
+                data() {
+                    return {
+                        isActive: [false, false],
+                    };
+                }, methods: {
+                    toogleActive(i) {
+                        this.isActive[i] = !this.isActive[i]
+                    }
+                }
+            }).mount("#app");
+        </script>
+    </body>
+
+    </html>
+</body>
+
+</html>

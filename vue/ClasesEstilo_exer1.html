@@ -11,8 +11,13 @@
             display: flex;
         }
 
-        main {
+        div {
+            display: flex;
             margin: 0 auto;
+        }
+
+        p:hover {
+            cursor: pointer;
         }
 
         .apartadoA {
@@ -22,20 +27,34 @@
 </head>
 
 <body>
-    <main>
-        <h1>Exercicio 1</h1>
-        <p :class="apartadoA">Probando exercicio 1</p>
 
-
-    </main>
+    <div id="app">
+        <main>
+            <h2>Exercicio 1</h2>
+            <p :class="{apartadoA : isYellow}" @click="toogleYellow"> Probando exercicio 1</p>
+            <h2>Exercicio 2</h2>
+            <p :style="isVermello" @click="toogleColor">Probando exercicio 2</p>
+        </main>
+    </div>
 
     <script>
         const { createApp } = Vue;
-
         createApp({
             data() {
                 return {
-                    apartadoA: true
+                    isYellow: true,
+                    isVermello: {
+                        color: "red"
+                    }
+                }
+            }, methods: {
+                toogleYellow() {
+                    this.isYellow = !this.isYellow
+                },
+                toogleColor() {
+
+                    this.isVermello.color = this.isVermello.color === "red" ? "green" : "red"
+
                 }
             }
         }).mount('#app');

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taboleiro</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+</head>
+
+<body>
+    <!doctype html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Exercicio 2</title>
+        <style>
+            .hidden {
+                display: none;
+            }
+
+            .visible {
+                display: block;
+            }
+
+            .claseA {
+                background-color: blueviolet;
+                color: white;
+            }
+
+            .claseB {
+                background-color: black;
+                color: red;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="app">
+            <h2>Exercicio 3</h2>
+            <input type="text" v-model="texto" placeholder="Introduce algo aquí">
+            <p :class="{claseA: texto == 'claseA', claseB: texto === 'claseB'}">Esto es un texto!</p>
+
+            <button>Boton</button>
+
+        </div>
+        <script>
+            const { createApp } = Vue;
+            createApp({
+                data() {
+                    return {
+                        isA: false,
+                        isB: false,
+                        texto: "",
+                        mostrar: false
+                    };
+                }
+            }).mount("#app");
+        </script>
+    </body>
+
+    </html>
+</body>
+
+</html>
