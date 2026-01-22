@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo Vue Componente</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        li {
+            cursor: pointer;
+        }
+
+        li:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <h3>Marcas de sintetizadores</h3>
+
+        <!-- Input para añadir -->
+        <input type="text" v-model="texto" placeholder="Escribe aquí pra engadir" @keyup.enter="engadir">
+
+        <!-- Botón para mostrar/ocultar lista -->
+        <button @click="toggleLista">
+            {{ listaVisible ? 'Ocultar lista' : 'Mostrar lista' }}
+        </button>
+
+        <!-- Lista de sintetizadores, solo se muestra si listaVisible es true -->
+        <ul v-show="listaVisible">
+            <li v-for="(sinte, index) in sintes" :key="sinte" @click="remove(index)">
+                {{ sinte }}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    sintes: ["korg", "roland", "elektron"],
+                    texto: "",
+                    listaVisible: true // nueva variable para controlar la visibilidad
+                }
+            },
+            methods: {
+                remove(index) {
+                    this.sintes.splice(index, 1);
+                },
+                engadir() {
+                    if (this.texto.trim() !== "") {
+                        this.sintes.push(this.texto);
+                        this.texto = "";
+                    }
+                },
+                toggleLista() {
+                    this.listaVisible = !this.listaVisible; // cambia el estado
+                }
+            }
+        }).mount('#app');
+    </script>
+
+
+</body>
+
+</html>

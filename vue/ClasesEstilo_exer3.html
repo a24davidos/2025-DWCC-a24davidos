@@ -44,6 +44,9 @@
             <input type="text" v-model="texto" placeholder="Introduce algo aquí">
             <p :class="{claseA: isA, claseB: isB, visible: visible, hidden: !visible}">Esto es un texto!</p>
             <button @click="alternar()">Botón</button>
+            <hr>
+            <input type="text" v-model="texto2" placeholder="Escribe un color en inglés">
+            <p :style="{backgroundColor: texto2}">Texto para probar</p>
         </div>
         <script>
             const { createApp } = Vue;
@@ -53,7 +56,9 @@
                         isA: false,
                         isB: false,
                         texto: "",
-                        visible: true
+                        texto2: "",
+                        visible: true,
+                        
                     };
                 }, methods: {
                     alternar() {

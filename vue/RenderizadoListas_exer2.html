@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo Vue Componente</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <h2>Lista de números pares</h2>
+        <ul>
+            <li v-for="numero in pares">{{numero}}</li>
+        </ul>
+
+
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    array: [1,2,3,4,5]
+                }
+            },
+            computed:{
+                pares(){
+                    return this.array.filter(n => n % 2 == 0)
+                }
+            }
+        }).mount('#app');
+    </script>
+
+</body>
+
+</html>
