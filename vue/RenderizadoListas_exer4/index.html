@@ -20,31 +20,35 @@
       <section id="monster" class="container">
         <h2>Monstro</h2>
         <div class="healthbar">
-          <div class="healthbar__value"></div>
+          <div class="healthbar__value" :style="{width: monstro + '%'}"></div>
         </div>
       </section>
       <section id="player" class="container">
         <h2>Vostede</h2>
         <div class="healthbar">
-          <div class="healthbar__value"></div>
+          <div class="healthbar__value" :style="{width: vostede + '%'}"></div>
         </div>
       </section>
-      <section class="container">
+      <section class="container" v-if="finPartida">
         <h2>Fin partida!</h2>
-        <h3>Perdiches!</h3>
-        <h3>Ganaches</h3>
-        <h3>Empate</h3>
-        <button>Novo xogo</button>
+        <h3 v-if="resultado === 'perdiches'">Perdiches!</h3>
+        <h3 v-if="resultado === 'ganaches'">Ganaches</h3>
+        <h3 v-if="resultado === 'empate'">Empate</h3>
+        <button @click="novaPartida">Novo xogo</button>
       </section>
-      <section id="controls">
-        <button>ATAQUE</button>
-        <button>ATAQUE ESPECIAL</button>
-        <button>CURACIÓN</button>
-        <button>RENDERSE</button>
+      <section id="controls" v-else>
+        <button @click="accionAtacar">ATAQUE</button>
+        <button @click="accionEspecial" :disabled="botonDesactivado">ATAQUE ESPECIAL</button>
+        <button @click="accionCurar">CURACIÓN</button>
+        <button @click="renderse">RENDERSE</button>
       </section>
       <section id="log" class="container">
         <h2>Rexistro da batalla</h2>
-        <ul></ul>
+        <ul>
+          <li v-for="(entrada, index) in logBatalla" v-html="entrada">
+            {{entrada}}
+          </li>
+        </ul>
       </section>
     </div>
   </div>
