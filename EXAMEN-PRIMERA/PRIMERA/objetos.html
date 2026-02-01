@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script defer>
+    // EXER 1 .Dada a seguinte constante, fai as operacións necesarias para que o primeiro
+    // carácter estea en maiúscula:
+    // const cadea = 'desenvolvemento web';
+    // // engade o teu código aquí
+    // console.log(novaCadea); // 'Desenvolvemento web'
+
+    const cadea = 'desenvolvemento web'
+    console.log(cadea[0].toLocaleUpperCase() + cadea.slice(1));
+    
+    console.log("--------------------------------------------");
+    
+
+    // Crea unha función denominada reverseString á que se lle pase unha cadea e
+    // devolva unha nova cadea cos caracteres da orixinal en sentido inverso.
+
+    // function reverseString(params) {
+    //     let resultado = ""
+    //     for (let index = params.length - 1; index >=0; index--) {
+    //         resultado =  resultado + params[index]
+    //     }
+    //     return resultado
+    // }
+
+    function reverseString(str) {
+        return str.split("").reverse().join("")
+    }
+
+    console.log(reverseString("I am a string")) // gnirts a ma I
+
+    console.log("--------------------------------------------");
+
+    
+    // Crea unha función denominada enmascarar á que se lle pase unha cadea de
+    // números e devolva unha cadea da mesma lonxitude que a pasada como parámetro
+    // pero formada formada por * e as últimas 4 cifras do parámetro de entrada.
+
+    function enmascarar(nume) {
+        return nume.slice(-4).padStart(10, "*")
+    }
+
+
+    console.log(enmascarar("1234123412347777")); // ************7777
+
+    // Crea unha función á que se lle pase como parámetro o número de minutos e
+    // devolva un string indicando a súa equivalencia en horas e minutos
+
+    function minutosHoras(minutos) {
+        return `Horas: ${Math.floor(minutos/60)} Minutos: ${minutos % 60}`
+    }
+    
+    console.log(minutosHoras(130));
+    
+    // Crea unha función á que se lle pase un mes (1-12) e un ano e devolva o número de
+    // días dese mes.
+
+    let date = new Date(2026,1,0)
+
+    function diasMes(mes) {
+        return new Date(2026,mes,0).getDate()
+    }
+
+    console.log(diasMes(1));
+    
+    // ARRAYS
+
+/* 1. Crea unha función que reciba como parámetros un elemento e un array. A función debe devolver un novo array que conteña os índices onde aparece ese elemento no array. */
+
+const numeros = [1, 3, 5, 1, 4, 1, 6, 8, 10, 1];
+
+function  buscarIndice(elemento, array) {
+    const resultado = []
+
+    array.forEach((valor, index) => {
+        if (valor == elemento) resultado.push(index)
+    });
+
+    return resultado
+}
+
+console.log(buscarIndice(1, numeros));
+
+
+
+/*2.- Dado o array froitas (const froitas = ['peras', 'mazás', 'kiwis', 'plátanos',
+'mandarinas'];) , fai os seguintes apartados co método splice: */
+
+const froitas = ['peras', 'mazás', 'kiwis', 'plátanos', 'mandarinas']
+
+/* a. Elimina as mazás. */
+
+froitas.splice(1,1)
+console.log(froitas);
+
+
+
+/* b. Engade laranxas e sandía detrás dos plátanos,. */
+
+froitas.splice(3,0, "laranxas", "sandía")
+
+console.log(froitas);
+
+
+/* c. Quita os kiwis e pon no seu lugar cereixas e nésperas. */
+
+froitas.splice(1,1 , "cereixas", "nisperos")
+
+console.log(froitas);
+
+/* 3.- Crea unha función á que se lle pase unha frase con varias palabras e devolva a mesma frase coa primeira letra de cada palabra en maiúsculas e o resto de letras en minúsculas. */
+
+let frase = "te vas de vacaciones"
+
+function mayusculas(frase) {
+
+    let palaras = frase.split(" ")
+
+    let palabrasCapital = palaras.map(palabra => {
+        return palabra[0].toUpperCase() + palabra.slice(1).toLowerCase()
+    })
+
+    return palabrasCapital.join(" ")
+
+}
+
+
+console.log(mayusculas(frase));
+
+
+console.log("DESESTRUCTURACIÓN DE ARRAYS ----------");
+
+/* const numeros = [1]; // array con un solo elemento
+
+// Desestructuramos con valores por defecto
+const [a, b = 10] = numeros;
+
+console.log(a); // 1  → toma el primer elemento del array
+console.log(b); // 10 → como no hay segundo elemento, usa el valor por defecto */
+
+/* [a, , b, , c] = numeros;
+console.log(`a = ${a}, b = ${b}, c = ${c}`); // a = 10, b = 30, c = 50 */
+
+/* Imaxinar que se recolle a seguinte información relativa a un xogo dun servidor web: */
+
+const players = [
+    [
+        "Neuer",
+        "Pavard",
+        "Martinez",
+        "Alaba",
+        "Davies",
+        "Kimmich",
+        "Goretzka",
+        "Coman",
+        "Muller",
+        "Gnarby",
+        "Lewandowski",
+    ],
+    [
+        "Burki",
+        "Schulz",
+        "Hummels",
+        "Akanji",
+        "Hakimi",
+        "Weigl",
+        "Witsel",
+        "Hazard",
+        "Brandt",
+        "Sancho",
+        "Gotze",
+    ],
+];
+
+/* Crea as variables players1, players2 que conteñan un array cos xogadores
+de cada equipo. Así, players1 terá os xogadores do primeiro equipo e
+players2 os do segundo equipo. */
+
+const [players1, players2] = players
+
+console.log(players1, players2);
+
+
+/* O primeiro xogador do array é o porteiro e o resto son xogadores de campo.
+Crea unha variable chamada gk que conteña o porteiro do primeiro equipo e
+unha variable de tipo array chamada fieldPlayers que conteña o resto de
+xogadores do equipo. */
+
+const [gk, ...fieldPlayers] = players1;
+console.log(gk); 
+console.log(fieldPlayers); 
+
+
+/* Crea un array allPlayers que conteña os xogadores dos dous equipos. */
+
+const allPlayers = [...players[0], ...players[1]]
+
+console.log(allPlayers);
+
+
+// d. O primeiro equipo substituíu os xogadores iniciais por 'Thiago', 'Coutinho', 'Periscic'. Crea unha nova variable de tipo array chamada players1Final que conteña todos os xogadores: os iniciais e tamén os 3 novos.
+
+
+
+
+/* Dado un array con nomes de variables formados por dúas palabras separadas por
+“_”, fai as operacións necesarias para mostrar por consola os nomes das variables
+en formato camelCase. Por exemplo, se o array de entrada é [“first_name”, “
+last_NAME”], deberase mostrar por consola “firtsName” e “lastName”. */
+
+const aName = ["first_name", "last_NAME"]
+
+
+
+const nuevos = ['Thiago', 'Coutinho', 'Perisic'];
+
+const players1Final = [...players[0], ...nuevos];
+
+console.log(players1Final);
+
+
+/* Escribe o código necesario para procesar unha cadea con información de voos
+como a do exemplo e mostrar a información por consola formateada como aparece
+na imaxe:
+
+/* Fixarse que a información mostrada por consola está aliñada pola dereita */
+
+const flightsInfo ="_Delayed_Departure;scq93766109;bio2133758440;11:25+_Arrival;bio0943384722;scq93766109;11:45+_Delayed_Arrival;svq7439299980;scq93766109;12:05+_Departure;scq93766109;svq2323639855;12:30";
+
+function procesarVoos(params) {
+    let array = params.split("+")
+
+    let array1 = array[0]
+
+
+    for (let a of array){
+        
+        const [tipo, inicio, final, hora] = a.split(";")
+
+        console.log(
+            `${tipo.slice(1).replace("_", " ")} ${inicio.slice(0,3).toUpperCase()} ${final.slice(0,3).toUpperCase()} (${hora.replace(":", "h")})`.padStart(33, " ")
+        );
+        
+    }
+    
+
+    return array, array1
+}
+
+console.log(procesarVoos(flightsInfo));
+
+console.log("OBXETOS------------------");
+
+/* Crea un obxecto chamado television coas propiedades marca, categoría
+(televisores), unidades (4), prezo (354.99) e un método chamado importe que
+devolva o prezo total das unidades (unidades x prezo). */
+
+const television = {
+    categoria: "televisores",
+    unidades: 4,
+    prezo: 354.99,
+
+    prezototal: function() {
+        return this.unidades * this.prezo
+    }
+    
+}
+
+console.log(television.prezototal());
+
+
+/* Imaxinar que se recolle a seguinte información relativa a un xogo dun servidor: */
+
+ const game = {
+    odds: {
+        team1: 1.33,
+        x: {
+            y:3
+        },
+        team2: 6.5,
+    }
+}; 
+
+const {odds:{team1, x:{y:draw} , team2}} = game
+
+console.log(team1, draw, team2);
+
+
+
+// team1: debe inicializarse co valor da propiedade team1 do obxecto inicial.
+// draw: debe inicializarse co valor da propiedade x do obxecto inicial.
+//  team2: debe inicializarse co valor da propiedade team2 do obxecto inicial.
+
+/* 3. Dado o seguinte obxecto: */
+
+const gamee = {
+scored: ["Lewandowski", "Gnarby", "Lewandowski", "Hummels"]
+};
+
+/* Recorre o array game.scored e mostra por pantalla información do xogador
+que marcou e o número de gol marcado. Exemplo: “Gol 1: Lewandowski”. */
+
+
+/* Crea un novo obxecto chamado scorers que conteña como propiedades o
+nome dos xogadores que marcaron e como valor o número de goles que
+marcaron respectivamente. Neste exemplo sería algo así: {Lewandowski: 2,
+Gnarby: 1, Hummels: 1} */
+
+let scrorers = {}
+
+for (const player of gamee.scored){
+    if (scrorers[player]){
+        scrorers[player] += 1
+    } else {
+        scrorers[player] = 1
+    }
+}
+
+
+console.log("SEEET---AND--MAP---");
+
+/* O seguinte mapa almacena información dos eventos ocorridos durante un partido
+indicando o minuto no que se produciron: */
+
+const gameEvents = new Map([
+    [17, "GOAL"],
+    [36, "Substitution"],
+    [47, "GOAL"],
+    [61, "Substitution"],
+    [64, "Yellow card"],
+    [69, "Red card"],
+    [70, "Substitution"],
+    [72, "Substitution"],
+    [76, "GOAL"],
+    [80, "GOAL"],
+    [92, "Yellow card"],
+]);
+
+/* Crea un novo array chamado eventos que almacene os diferentes eventos
+(non o minuto) ocorridos durante o partido (sen que haxa duplicados). */
+
+let eventos = new Set(gameEvents.values())
+
+console.log(eventos);
+/*Esto no va porque los maps no son arrays, si quieres entrar a una en especifico utilizamos arrays */
+// console.log(gameEvents[0].values());
+
+
+/* Recorre con un bucle o mapa gameEvents e mostra información de cada
+evento, indicando se ocorreu na primeira metade ou na segunda metade do
+partido, por exemplo: [PRIMEIRA PARTE] 17: GOAL. */
+
+
+
+for (const[key, value] of gameEvents){
+    if (key < 46) {
+        console.log(`PRIMEIRA PARTE - ${key}: ${value} `);
+    } else {
+        console.log(`SEGUNDA PARTE - ${key}: ${value} `);
+
+    }
+}
+
+
+    
+
+
+
+</script>
+
+</html>
