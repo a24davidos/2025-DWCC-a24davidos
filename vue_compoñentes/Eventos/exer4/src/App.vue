@@ -10,7 +10,7 @@ export default {
 		return {
 			c: {
 				nome: 'Xacobo',
-				nacemento: '2005',
+				nacemento: 2005,
 			},
 		};
 	},

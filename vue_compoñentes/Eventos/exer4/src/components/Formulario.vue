@@ -10,7 +10,11 @@
 export default {
 	props: {
 		nome: String,
-		nacemento: String,
+		nacemento: {
+			type: Number,
+			required: true,
+			validator: (value) => value > 0
+		},
 	},
 	data() {
 		return {
