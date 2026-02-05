@@ -1,7 +1,8 @@
 <template>
 	<div>
 		<h3>Titulo: {{ titulo }}</h3>
-		<p></p>
+		<p>Descripcion: {{ desc }}</p>
+		<a href="#">{{ ligazon }}</a>
 	</div>
 </template>
 
