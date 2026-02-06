@@ -2,7 +2,11 @@
 	<div>
 		<h3>Titulo: {{ titulo }}</h3>
 		<p>Descripcion: {{ desc }}</p>
-		<a href="#">{{ ligazon }}</a>
+		<!-- Los atributos tienen que ser pasado por bindin, no vale usar  {{  }} -->
+		<a :href="ligazon">{{ ligazon }}</a>
+		<br>
+		<br>
+		<button @click="$emit('delete', titulo)">Delete</button>
 	</div>
 </template>
 
@@ -15,4 +19,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

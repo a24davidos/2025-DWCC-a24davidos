@@ -1,12 +1,22 @@
 <template>
-	<Tarxeta
-		:class="'borde'"
-		v-for="(dato, index) in datos"
-		:key="index"
-		:titulo="dato.titulo"
-		:desc="dato.desc"
-		:ligazon="dato.ligazon"
+
+	<div v-for="tab in tabs" :key="tab">
+		<label>
+			<input type="radio" :value="tab" v-model="currentTab" />
+			{{ tab }}
+		</label>
+	</div>
+
+	<component 
+	:is="currentTab" 
+	:datos="datos"
+	@delete="deletecard"
+	@add="engadir"
 	/>
+
+
+
+
 </template>
 
 <style>
@@ -20,11 +30,12 @@
 </style>
 
 <script>
-import Tarxeta from './components/Tarxeta.vue';
 
 export default {
 	data() {
 		return {
+			currentTab: 'ListaTarxetas',
+			tabs: ['ListaTarxetas', 'Formulario'],
 			datos: [
 				{
 					titulo: 'Prueba1',
@@ -38,6 +49,20 @@ export default {
 				},
 			],
 		};
-	},
+	}, methods: {
+		deletecard(titulo) {
+			this.datos = this.datos.filter((x) => x.titulo != titulo)
+		},
+		engadir(tituloD, descD,ligazonD){
+			let data = {
+				titulo: tituloD,
+				desc: descD,
+				ligazon: ligazonD
+			}
+
+			this.datos.push(data)
+			this.currentTab = 'ListaTarxetas'
+		}
+	}
 };
 </script>

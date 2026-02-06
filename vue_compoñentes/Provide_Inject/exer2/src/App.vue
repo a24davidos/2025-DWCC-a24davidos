@@ -3,15 +3,19 @@
 
 		<input type="text" id="name" v-model="texto_filtro"  placeholder="Filtrar por apelido">
 
-		<select @click="seleccionarPersona" size="20" id="" style="width: 200px;">
+		<select v-model="personaSeleccionada" @change="seleccionar" size="20" id="" style="width: 200px;">
 			<option :value="dato" v-for="dato in datosFiltrados">{{ dato.apellido }}, {{ dato.nombre }}</option>
 		</select>
 
 		<label for="nome">Nome</label>
-		<input type="text" id="nome" placeholder="Nome" :value="referencia.nombre">
+		<input type="text" id="nome" placeholder="Nome" v-model="campoNome" >
 
 		<label for="apelido">Apelido</label>
-		<input type="text" id="nome" placeholder="Apelido" :value="referencia.apellido">
+		<input type="text" id="nome" placeholder="Apelido"  v-model="campoApelido" > 
+
+		<button @click="añadir">Añadir</button>
+		<button @click="actualizar">Actualizar</button>
+		<button @click="borrar" >Borrar</button>
 
 	</div>
 </template>
@@ -49,10 +53,50 @@ export default {
 				apellido: 'Otero'
 			}
 			],
-			referencia: {}
+			campoNome: "",
+			campoApelido: "",
+			personaSeleccionada: {}
 
 		};
 	},methods:{
+		seleccionar(){
+			this.campoNome = this.personaSeleccionada.nombre
+			this.campoApelido= this.personaSeleccionada.apellido
+			
+		},
+		añadir(){
+			if (this.campoNome && this.campoApelido){
+
+				// Creo un novo obxeto
+				let dato = {}
+				dato.id = Date.now
+				dato.nombre = this.campoNome
+				dato.apellido = this.campoApelido
+
+				// Metoo no array
+				this.datos.push(dato)
+				// Limpo os campos
+				this.campoNome = ""
+				this.campoApelido = ""
+			}
+
+		}, 
+		borrar(){
+			this.datos = this.datos.filter((x) => x.id != this.personaSeleccionada.id)
+			this.personaSeleccionada = {}
+			this.campoNome = ""
+			this.campoApelido = ""
+		},
+		actualizar(){
+			this.personaSeleccionada.nombre = this.campoNome
+			this.personaSeleccionada.apellido = this.campoApelido
+
+			this.campoNome = ""
+			this.campoApelido = ""
+
+		}
+
+
 
 	} ,computed: {
 		datosFiltrados() { 
