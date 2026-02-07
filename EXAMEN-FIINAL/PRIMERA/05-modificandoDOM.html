@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="gl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Práctica DOM</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      #contedor {
+        width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+      }
+
+      .resaltado {
+        background-color: yellow;
+        font-weight: bold;
+      }
+
+      #lista {
+        margin: 15px 0;
+        padding: 10px;
+        background-color: #f5f5f5;
+      }
+
+      button {
+        padding: 8px 15px;
+        margin: 5px;
+        cursor: pointer;
+      }
+
+      #mensaxe {
+        color: green;
+        margin: 10px 0;
+      }
+
+      .oculto {
+        display: none;
+      }
+
+      .color-title {
+        color: red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="contedor">
+      <h1 id="tituloPrincipal">Práctica Manipulación DOM</h1>
+
+      <ul id="lista">
+        <li class="item-lista">Item 1</li>
+        <li class="item-lista">Item 2</li>
+        <li class="item-lista">Item 3</li>
+        <li class="item-lista">Item 4</li>
+      </ul>
+
+      <button id="btnAccion">Acción</button>
+      <button id="btnAlternar">Alternar Clase</button>
+
+      <div id="mensaxe">Esta é unha mensaxe importante</div>
+
+      <form id="formulario">
+        <input type="text" id="entradaTexto" placeholder="Ingresa texto" />
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+
+    <script src="05-modificandoDOM.js"></script>
+  </body>
+</html>

@@ -62,41 +62,40 @@
     const thead = table.querySelector("thead");
     const tbody = table.querySelector("tbody"); // ahora sí
 
-    let filas = Array.from(tbody.rows)
+    // Ejercicio de ordenar segun donde clicken
 
-    console.log(thead);
+    thead.addEventListener("click", (e) => {
+      const th = e.target.closest("th");
+      if (!th) return;
 
-    thead.addEventListener("click", function (e) {
-      //Cojemos la referencia de donde se clicka para saber el type
-      let th = e.target
-      console.log(th.dataset.type);
-      //Cojemos el indice de donde se clicko para poder hacer la comperación
-      let indice = th.cellIndex;
-      console.log(indice);
-      
-      //Una vez cogida la referencia de donde se clicko guardamos el type en una variable
-      let type = th.dataset.type;
+      const indice = th.cellIndex;
 
+      if (indice === 0) { // Age
+        const filas = Array.from(tbody.querySelectorAll("tr"));
 
-      if (type === "string") {
         filas.sort((a, b) => {
-          let nomeA = a.cells[indice].textContent.toLocaleLowerCase();
-          let nomeB = b.cells[indice].textContent.toLocaleLowerCase();
-          return nomeA.localeCompare(nomeB);
-        })
+          const ageA = Number(a.cells[0].textContent);
+          const ageB = Number(b.cells[0].textContent);
+          return ageA - ageB; // ascendente
+        });
+
+        tbody.innerHTML = "";
+        filas.forEach(tr => tbody.append(tr));
       } else {
-        filas.sort((a, b) => {
-          let numA = Number(a.cells[indice].textContent)
-          let numB = Number(b.cells[indice].textContent)
-          return numA - numB
+        const filas = Array.from(tbody.querySelectorAll("tr"));
+
+        filas.sort((a,b) => {
+          const nombreA =  a.cells[1].innerText.toLowerCase()
+          const nombreB = b.cells[1].innerText.toLowerCase()
+          
+          return nombreA.localeCompare(nombreB)
+        
         })
-      }
 
-      for (let fila of filas) {
-        tbody.appendChild(fila)
-      }
+        filas.forEach((x) => tbody.append(x))
 
-    })
+      }
+    });
 
   </script>
 </body>

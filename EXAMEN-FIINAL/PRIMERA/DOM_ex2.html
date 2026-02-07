@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- Exercicio 2 -->
+    <ol>
+        <li>hola</li>
+        <li>que</li>
+        <li>tal</li>
+        <li>David</li>
+    </ol>
+
+    <!-- Exercicio 5 -->
+    <ul id="listaULExercicio5">
+        <li id="one">1</li>
+        <li id="two">4</li>
+    </ul>
+
+
+    <script defer>
+
+        let ol = document.getElementsByTagName("ol")[0]
+        ol.innerHTML = ""
+
+        let lista = document.getElementById("listaULExercicio5")
+
+        console.log(lista);
+        
+        let li2 = document.createElement("li")
+        li2.innerText = "2"
+
+        console.log(li2);
+        
+        console.log(lista.children[0].after(li2));
+
+        let li3 = document.createElement("li")
+        li3.innerText = "3"
+
+        console.log(lista.lastElementChild.before(li3));
+                
+
+    </script>
+</body>
+
+</html>
