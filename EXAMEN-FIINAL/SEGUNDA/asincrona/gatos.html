@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <main>
+        <h1>Pagina web gatos</h1>
+
+
+    </main>
+    <script>
+        "use strict";
+
+        let datos = []
+
+        async function getData() {
+            try {
+                const response = await fetch('https://mdn.github.io/learning-area/javascript/oojs/tasks/json/sample.json');
+                if (!response.ok) throw new Error('Request Failed');
+                const data = await response.json();
+                console.log(data);
+                datos = data
+
+
+                //Meter lógica de los gatos 
+
+                const main = document.getElementsByTagName("main")[0]
+
+                let p = document.createElement("p")
+
+                let resultado = "Os nomes das gatas son ";
+
+                datos.forEach((gata, i) => {
+                    resultado += gata.name
+                        + (i === datos.length - 1 ? "."       // último
+                            : i === datos.length - 2 ? " e "      // penúltimo
+                                : ", ");                               // resto
+                });
+
+                p.textContent = resultado;
+                main.appendChild(p);
+
+
+
+
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getData();
+
+
+
+
+    </script>
+</body>
+
+</html>

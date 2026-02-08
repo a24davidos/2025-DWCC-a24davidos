@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realizar Pedido</title>
+</head>
+<body>
+    <h1>Buscar Cliente</h1>
+    <form id="buscarClienteForm">
+        <input type="text" id="telefono" placeholder="Introduce teléfono" required>
+        <button type="submit">Buscar</button>
+    </form>
+
+    <div id="clienteInfo" style="display:none; margin-top:20px;">
+        <p><strong>Dirección:</strong> <span id="direccion"></span></p>
+        <p><strong>Pedido típico:</strong></p>
+        <form id="pedidoForm">
+            <input type="text" id="pedidoDescripcion" required>
+            <button type="submit">Realizar pedido</button>
+        </form>
+    </div>
+
+    <script>
+        const buscarClienteForm = document.getElementById('buscarClienteForm');
+        const clienteInfoDiv = document.getElementById('clienteInfo');
+        const direccionSpan = document.getElementById('direccion');
+        const pedidoDescripcionInput = document.getElementById('pedidoDescripcion');
+        const pedidoForm = document.getElementById('pedidoForm');
+
+        // Buscar cliente por teléfono
+        buscarClienteForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const telefono = document.getElementById('telefono').value;
+            try {
+                const response = await fetch(`http://localhost:3000/clientes?telefono=${telefono}`);
+                const data = await response.json();
+
+                if (data.length === 0) {
+                    alert('Cliente non atopado');
+                    clienteInfoDiv.style.display = 'none';
+                    return;
+                }
+
+                const cliente = data[0];
+                direccionSpan.textContent = cliente.direccion;
+                pedidoDescripcionInput.value = cliente.pedidoTipico;
+                clienteInfoDiv.style.display = 'block';
+                pedidoForm.dataset.telefono = cliente.telefono;
+            } catch (error) {
+                console.error('Erro ao buscar cliente', error);
+            }
+        });
+
+        // Crear novo pedido
+        //Guarda el telefono en el form con un data set, que lsito
+        pedidoForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const telefono = e.target.dataset.telefono;
+            const descripcion = pedidoDescripcionInput.value;
+
+            try {
+                const response = await fetch('http://localhost:3000/pedidos', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ telefonoCliente: telefono, descripcion })
+                });
+                const data = await response.json();
+                alert('Pedido realizado: ' + data.descripcion);
+                pedidoDescripcionInput.value = data.descripcion;
+            } catch (error) {
+                console.error('Erro ao realizar pedido', error);
+            }
+        });
+    </script>
+</body>
+</html>

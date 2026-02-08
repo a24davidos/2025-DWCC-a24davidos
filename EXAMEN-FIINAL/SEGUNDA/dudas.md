@@ -1,0 +1,2 @@
+- Mirar el tema del blur y donde hay que clickar para que funcione el blur
+- Mirar el localstorage tb 

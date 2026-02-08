@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        li {
+            list-style: none;
+        }
+
+
+        img {
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Random Pokemon</h1>
+    <div id="container"></div>
+    <button id="cargar">Pokemon aleatorio</button>
+    <script>
+
+        const container = document.getElementById("container")
+        const boton = document.getElementById("cargar")
+
+        function randomIntFromInterval(min, max) { // min and max included 
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+
+
+        function cargarPokemon() {
+            let numeroPokemon = randomIntFromInterval(1, 1000)
+            fetch(`https://pokeapi.co/api/v2/pokemon/${numeroPokemon}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.abilities[0].ability.url);
+                    crearPokemon(data)
+
+                })
+                .catch(error => {
+                    container.innerHTML = "<p>Error cargando el Pokémon</p>"
+                    console.error(error)
+                });
+
+        }
+
+        function crearPokemon(pokemon) {
+
+            //Vacio el container
+            container.innerHTML = "";
+
+
+            //Cojo la referencia de la imagen
+            const imagenPokemon = document.createElement("img")
+            imagenPokemon.src = pokemon.sprites.other.home.front_default
+
+            //Cojo la referencia del nombre
+            const nomePokemon = document.createElement("h2")
+            nomePokemon.innerText = pokemon.name
+
+            //Cargo las habilidades
+            const ul = document.createElement("ul")
+            const habilidades = pokemon.abilities
+
+            habilidades.forEach(habilidad => {
+                const li = document.createElement("li")
+                const a = document.createElement("a")
+
+                a.href = habilidad.ability.url
+                a.innerText = habilidad.ability.name
+                a.target = "_blank"
+
+                li.append(a)
+                ul.append(li)
+
+                fetch(`${habilidad.ability.url}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data.names[5].language.name)
+
+                        let nomeEspañol = data.names.find(n => n.language.name === "es")
+
+                        if (nomeEspañol) {
+                            const span = document.createElement("span")
+                            span.innerText = ` (${nomeEspañol.name})`
+                            li.append(span)
+                            console.log(nomeEspañol.name);
+
+                        }
+
+                    })
+
+            });
+
+            container.append(imagenPokemon)
+            container.append(nomePokemon)
+            container.append(ul)
+
+        }
+
+        //Boton que te permite cargar un nuevo pokemon
+        boton.addEventListener("click", () => {
+            cargarPokemon()
+        })
+
+
+
+
+        cargarPokemon()
+
+    </script>
+</body>
+
+</html>

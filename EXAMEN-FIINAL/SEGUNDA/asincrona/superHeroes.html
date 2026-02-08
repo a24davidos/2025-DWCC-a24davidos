@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Our superheroes</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Faster+One" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+
+    </header>
+
+    <section>
+
+    </section>
+
+    <script>
+        async function getData() {
+            try {
+                const response = await fetch('https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json');
+                if (!response.ok) throw new Error('Request Failed');
+                const data = await response.json();
+                console.log(data);
+
+                const membersArray = data.members
+                console.log(membersArray);
+
+
+                const header = document.getElementsByTagName("header")[0]
+                const section = document.getElementsByTagName("section")[0]
+
+                //Creo o titulo
+                let h1 = document.createElement("h1")
+                h1.innerText = data.squadName
+                header.appendChild(h1)
+
+                //Creo subtitulo
+                let h3 = document.createElement("p")
+                h3.innerText = `Hometown: ${data.homeTown} // Formed: ${data.formed}`
+                header.appendChild(h3)
+
+                //Creo os Superheroes
+                membersArray.forEach((h) => crearHeroe(h) );
+
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        function crearHeroe(heroe) {
+
+            //Collo a referncia da sección
+            const section = document.getElementsByTagName("section")[0]
+
+            //Creo o articulo
+            let article = document.createElement("article")
+            //Creo o titulo
+            let h2 = document.createElement("h2")
+            h2.innerText = heroe.name
+
+            let pNome = document.createElement("p");
+            let pAge = document.createElement("p");
+            let pSuperPoderes = document.createElement("p")
+
+            pNome.innerText = `Secret identity: ${heroe.secretIdentity}`
+            pAge.innerText = `Age: ${heroe.age}`
+            pSuperPoderes.innerText = `Superpowers: `
+
+            //Creo a lista
+            let ul = document.createElement("ul")
+
+            heroe.powers.forEach((superpoder) => {
+                let li = document.createElement("li")
+                li.innerText = superpoder
+                ul.appendChild(li)
+            })
+
+            //Engado o titulo, o nome e a idade
+            article.appendChild(h2)
+            article.appendChild(pNome)
+            article.appendChild(pAge)
+            article.appendChild(pSuperPoderes)
+            article.appendChild(ul)
+            //Engado o article
+            section.appendChild(article)
+        }
+
+
+        getData();
+    </script>
+</body>
+
+</html>

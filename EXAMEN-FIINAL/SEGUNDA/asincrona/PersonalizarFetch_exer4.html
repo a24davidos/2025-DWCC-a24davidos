@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cataas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #f0f0f0;
+        }
+
+        form {
+            margin: 20px;
+        }
+
+        #container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .cat-card {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .cat-card img {
+            width: 200px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Buscador de gatos</h1>
+    <form id="catForm">
+        <input type="text" name="cat" id="tag" placeholder="Etiqueta (ej: cute, funny)">
+        <button type="submit" id="submit">Buscar</button>
+    </form>
+    <div id="container">
+
+    </div>
+    <script>
+
+        const container = document.getElementById("container")
+        const boton = document.getElementById("submit")
+        const form = document.getElementById("catForm")
+        const tag = document.getElementById("tag")
+
+        form.addEventListener("click", (e) => {
+            e.preventDefault()
+
+            //Nos aseguramos que clicke en el boton
+            if (e.target.id === "submit") {
+
+                //Utilizamos la api para buscar por tags
+                fetch(`https://cataas.com/api/cats?tags=${tag.value.trim()}`)
+                    .then(response => response.json())
+                    .then(data => {
+
+                        console.log(data)
+                        console.log(data[1]);
+
+                        if (data.length === 0) {
+                            container.innerHTML = "<p>No se encontraron gatos con ese tag</p>"
+                        } else {
+                            //Vacío el container primero
+                            container.innerHTML = ""
+                            //Llamamos a la función que crea gatos
+                            data.forEach(gato => crearGato(gato));
+                        }
+
+                    })
+                    .catch(error => {
+                        container.innerHTML = "<p>Aconteceu un erro</p>"
+                    })
+
+            }
+
+
+
+        })
+
+
+        function crearGato(gato) {
+            //Creamos el div
+            const div = document.createElement("div")
+            //Le añadimos un identificador de clase
+            div.classList.add("cat-card")
+            //cojo la imagen del gato
+            const img = document.createElement("img")
+            //Pongo el link hacia la imagen
+            img.src = `https://cataas.com/cat/${gato.id}`
+
+            //Creo un elemento con los tags
+            const h3 = document.createElement("h3")
+            h3.innerText = gato.tags.join(", ")
+
+            div.append(img, h3)
+            container.append(div)
+
+        }
+
+
+    </script>
+</body>
+
+</html>
