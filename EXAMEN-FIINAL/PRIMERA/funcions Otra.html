@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script defer>
+        "use strict";
+        /* 1. Crea unha función frecha que devolva o cubo dun número pasado como parámetro. */
+
+        const cubo = x => x**3
+
+        console.log(cubo(3));
+        
+        console.log("--------------------------");
+
+
+        /* 2. Crea unha función frecha á que se lle pase un array e devolva como resultado un 
+           array cos elementos impares do array de entrada. */
+
+
+            const impares = array => array.filter(n => n % 2 !== 0);
+
+            console.log(impares([3, 4, 5, 6])); // [3, 5]
+
+
+        console.log("--------------------------");
+
+
+        /* 3. Crea unha función frecha que sume todos os valores pasados como parámetros, 
+           sendo estes un número indeterminado. */
+
+        const sumaTotal = (...array) => array.reduce((a,c) => a + c, 0)
+
+        console.log(sumaTotal(2,3,4,5));
+        
+        console.log("--------------------------");
+
+
+        /* 4. Crea unha función á que se lle pasen varios números como parámetros (un número 
+           indeterminado de parámetros) e que devolva a media deses números. */
+
+        console.log("--------------------------");
+
+       
+        const media = (...array) => array.reduce((a,c) => a + c) / array.length
+
+        console.log(media(2,3,4,5,6));
+        
+
+        /* 5. Crea unha función frecha chamada minMax() que reciba como parámetro un array 
+           de números e devolva un obxecto co valor mínimo e máximo do array de entrada. */
+
+        
+
+
+
+        /* 6. Crea unha función autoinvocada á que se lle pase a lonxitude e ancho dun rectángulo. 
+           A función debe mostrar por consola unha mensaxe indicando o valor da área do rectángulo. */
+
+
+        console.log("--------------------------");
+
+
+        const funcionAutoinvocada = (function (x, y) {
+            return x * y
+        })
+
+
+
+
+
+        /* 7. Crea unha función á que se lle pase un DNI (ex: 12345678w ou 87654321T) e 
+           devolva se é correcto ou non. */
+
+        console.log("--------------------------");
+
+        /* 8. Crea unha función que reciba como parámetro unha cantidade enteira e faga o 
+           desglose do número de billetes e moedas necesarios para obtela. Debe usarse o 
+           número mínimo de billetes e moedas. */
+
+        function desglose(cantidad) {
+            const valores = [500, 200, 100, 50, 20, 10, 5, 2, 1];
+            const resultado = {};
+            let dineroRestante = cantidad;
+
+            for (let i = 0; i < valores.length; i++) {
+                let valorActual = valores[i];
+
+                // 1. Calculamos CANTOS billetes/moedas caben
+                let numBilletes = Math.floor(dineroRestante / valorActual);
+
+                if (numBilletes > 0) {
+                    // 2. Gardamos a cantidade no obxecto
+                    resultado[`${valorActual}€`] = numBilletes;
+
+                    // 3. ACTUALIZAMOS o diñeiro que queda por desglosar
+                    // O novo "dineroRestante" é o resto da división
+                    dineroRestante = dineroRestante % valorActual;
+                }
+            }
+
+            return resultado;
+        }
+
+        console.log(desglose(888));
+        // Resultado esperado: { "500€": 1, "200€": 1, "100€": 1, "50€": 1, "20€": 1, "10€": 1, "5€": 1, "2€": 1, "1€": 1 }
+
+
+        console.log(desglose(1000));
+
+
+        /* 9. Crea unha función chamada buscarPatron(texto, patron) que reciba como parámetros
+           un texto e un patrón. A función debe devolver como resultado o número de veces que 
+           aparece o patrón no texto, tendo en conta que un carácter pode formar parte de máis 
+           dun patrón encontrado. Debe implementarse a función de forma manual sen utilizar as 
+           funcións de JavaScript para buscar en cadeas. Non se deben distinguir maiúsculas. */
+
+
+
+        /* 10. Crea un sistema para axendar reunións que comprobe se unha hora de inicio e
+            duración determinadas entran dentro dunha xornada laboral definida. */
+
+        /* 11. Crea unha función que reciba un array bidimensional de lonxitude variable que se
+            corresponda cun escenario do xogo de Buscaminas. Este array almacenará un -1 nas 
+            posicións onde hai minas e un 0 en caso contrario. A función debe devolver un array 
+            bidimensional onde cada posición que non teña mina, debe ter a información do 
+            número de minas adxacentes (diagonal, horizontal e vertical). */
+
+        /* 12. Suma os valores da propiedade price dun array de obxectos. */
+
+        const price = [{prezo:2}, {prezo: 3}, {prezo: 5}]
+
+        console.log(price.reduce((a,b) => a + b.prezo, 0));
+        
+
+        /* 13. Utilizando a función reduce, obtén o valor mínimo dun array de números. */
+
+        const numeross = [18, 22, 33, 4, 45, 66, 7, 8, 9]
+
+       
+
+
+
+        // 14. Dado un array de persoas (obxectos con nome, idade e id):
+
+        const persoas = [
+            { nome: 'aaron', idade: 65, id: 1 },
+            { nome: 'beth', idade: 2, id: 2 },
+            { nome: 'ánxeles', idade: 13, id: 3 },
+            { nome: 'daniel', idade: 3, id: 4 },
+            { nome: 'ada', idade: 25, id: 5 },
+            { nome: 'erea', idade: 1, id: 6 },
+            { nome: 'navia', idade: 43, id: 7 },
+        ];
+
+
+        // a. Crea un novo array que conteña só as persoas maiores de idade.
+
+      
+
+
+        // b. Crea un novo array que conteña os nomes (só os nomes) de todas as persoas.
+
+
+
+        // c. Crea un novo array que conteña, en maiúsculas, os nomes das persoas maiores de idade.
+
+
+
+
+        // d. Crea un novo array que conteña obxectos só co id e o nome das persoas.
+
+
+
+        // 15. Dado un array cos días da semana en minúsculas:
+
+        const diasSemana = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo']
+
+        // a. Obtén un novo array cos días que empecen por “m” e móstrao por consola.
+
+      
+
+        // b. Mostra unha mensaxe indicando se algún día comeza por ‘s’.
+
+      
+
+        // c. Mostra por consola o primeiro día que empece por “m”.
+
+
+
+        // d. Mostra por consola a posición no array do primeiro día que empeza por “m”.
+
+      
+
+
+        // e. Crea un novo array cos días da semana en maiúsculas. 
+
+
+
+        /* 16. Fai unha función que ordene as notas dun array pasado como parámetro. Debes
+            utilizar a función sort e pasarlle unha función de comparación. */
+
+
+
+
+
+
+        /* 17. Dado un array de números, obtén o valor máis alto. */
+
+        const numerosss = [45, 12, 89, 2, 27];
+
+
+
+
+
+        //  18. Dada unha lista de inventores (obxectos con nome, apelido, nacemento e morte):
+        const inventors = [
+            { first: "Albert", last: "Einstein", year: 1879, passed: 1955 },
+            { first: "Isaac", last: "Newton", year: 1643, passed: 1727 },
+            { first: "Galileo", last: "Galilei", year: 1564, passed: 1642 },
+            { first: "Marie", last: "Curie", year: 1867, passed: 1934 },
+            { first: "Johannes", last: "Kepler", year: 1571, passed: 1630 },
+            { first: "Nicolaus", last: "Copernicus", year: 1473, passed: 1543 },
+            { first: "Max", last: "Planck", year: 1858, passed: 1947 },
+            { first: "Katherine", last: "Blodgett", year: 1898, passed: 1979 },
+            { first: "Ada", last: "Lovelace", year: 1815, passed: 1852 },
+            { first: "Sarah", last: "Goode", year: 1855, passed: 1905 },
+            { first: "Lise", last: "Meitner", year: 1878, passed: 1968 },
+            { first: "Hanna", last: "Hammarström", year: 1829, passed: 1909 },
+        ];
+
+        //     a. Filtra o array e crea un array só cos inventores que naceron no século XVI.
+
+      
+
+        //     b. Crea un array co nome completo dos inventores.
+
+
+
+
+        //     c. Unha vez obtido o array co nome completo, ordénao alfabeticamente polo apelido.
+
+
+
+        //     d. Ordena alfabeticamente polo apelido o array de obxectos inventores inicial.
+
+      
+
+
+        //     e. Ordena o array de inventores pola data de nacemento.
+
+
+
+
+        //     f. Calcula a suma dos anos que viviron todos os inventores.
+
+      
+
+        //     g. Ordena os inventores polos anos que viviron, primeiro o máis lonxevo. 
+
+
+
+        // Consigue el numero mayor y menor con una función flecha:
+
+        const numeros = [45, 12, 89, 2, 27];
+
+
+        // Dada a seguinte información, obtén un obxecto con unha propiedade para cada
+        // medio de transporte, indicando o número de veces que se repite no array.É dicir, o
+        // resultado debería ser { car: 5, truck: 3, bike: 2, walk: 2, van: 2, pogostick: 1 }.Intentar
+        // facer o exercicio usando o método reduce
+
+        const data = [
+            "car",
+            "car",
+            "truck",
+            "truck",
+            "bike",
+            "walk",
+            "car",
+            "van",
+            "bike",
+            "walk",
+            "car",
+            "van",
+            "car",
+            "truck",
+            "pogostick",
+        ];
+
+        const resultadoo = data.reduce((a, b) => {
+            if (a[b]) {
+                a[b]++; // Se xa existe, sumamos
+            } else {
+                a[b] = 1; // Se non existe, creámolo con 1
+            }
+            return a;
+        }, {});
+
+    </script>
+</body>
+
+</html>
