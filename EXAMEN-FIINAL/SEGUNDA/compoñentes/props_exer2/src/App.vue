@@ -9,6 +9,7 @@
   :favorito="contacto.favorito"
   @cambiar="visualizacion(contacto)"
   @add="fav(contacto)"
+  @delete="deleteContact"
   />
 
   <Formulario @crear="crearContacto"/>
@@ -56,6 +57,10 @@ export default {
 
       this.contactos.push(data)
 
+    },
+    deleteContact(telefono){
+      console.log(telefono);
+      this.contactos = this.contactos.filter((x) => x.telefono != telefono)
     }
   }
 }

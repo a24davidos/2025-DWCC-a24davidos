@@ -12,6 +12,7 @@
             <button @click="this.$emit('add')">
                 {{ favorito ? "Quitar Fav" : "Facer Fav" }}
             </button>
+            <button @click="$emit('delete', telefono)" >Delete</button>
         </div>
     </div>
 </template>
